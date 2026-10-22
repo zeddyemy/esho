@@ -19,6 +19,7 @@ import { Route as PrimaryAboutRouteImport } from './routes/_primary/about'
 import { Route as PrimaryContactRouteImport } from './routes/_primary/contact'
 import { Route as AdminDashboardRouteImport } from './routes/admin/_dashboard'
 import { Route as AdminForgotPasswordRouteImport } from './routes/admin/forgot-password'
+import { Route as AdminGuideDothtmlRouteImport } from './routes/admin/guide[.]html'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
 import { Route as ApiKeepAliveRouteImport } from './routes/api/keep-alive'
@@ -30,11 +31,13 @@ import { Route as AdminDashboardIndexRouteImport } from './routes/admin/_dashboa
 import { Route as AdminDashboardContentRouteImport } from './routes/admin/_dashboard/content'
 import { Route as AdminDashboardExperienceRouteImport } from './routes/admin/_dashboard/experience'
 import { Route as AdminDashboardInquiriesRouteImport } from './routes/admin/_dashboard/inquiries'
-import { Route as AdminDashboardPostsRouteImport } from './routes/admin/_dashboard/posts'
-import { Route as AdminDashboardProjectsRouteImport } from './routes/admin/_dashboard/projects'
 import { Route as AdminDashboardSettingsRouteImport } from './routes/admin/_dashboard/settings'
 import { Route as AdminDashboardStackRouteImport } from './routes/admin/_dashboard/stack'
 import { Route as AdminDashboardTestimonialsRouteImport } from './routes/admin/_dashboard/testimonials'
+import { Route as AdminDashboardPostsIndexRouteImport } from './routes/admin/_dashboard/posts.index'
+import { Route as AdminDashboardPostsPostIdRouteImport } from './routes/admin/_dashboard/posts.$postId'
+import { Route as AdminDashboardProjectsIndexRouteImport } from './routes/admin/_dashboard/projects.index'
+import { Route as AdminDashboardProjectsProjectIdRouteImport } from './routes/admin/_dashboard/projects.$projectId'
 
 const PrimaryRoute = PrimaryRouteImport.update({
   id: '/_primary',
@@ -83,6 +86,11 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
 const AdminForgotPasswordRoute = AdminForgotPasswordRouteImport.update({
   id: '/admin/forgot-password',
   path: '/admin/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminGuideDothtmlRoute = AdminGuideDothtmlRouteImport.update({
+  id: '/admin/guide.html',
+  path: '/admin/guide.html',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -141,16 +149,6 @@ const AdminDashboardInquiriesRoute = AdminDashboardInquiriesRouteImport.update({
   path: '/inquiries',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
-const AdminDashboardPostsRoute = AdminDashboardPostsRouteImport.update({
-  id: '/posts',
-  path: '/posts',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
-const AdminDashboardProjectsRoute = AdminDashboardProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
 const AdminDashboardSettingsRoute = AdminDashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -167,6 +165,30 @@ const AdminDashboardTestimonialsRoute =
     path: '/testimonials',
     getParentRoute: () => AdminDashboardRoute,
   } as any)
+const AdminDashboardPostsIndexRoute =
+  AdminDashboardPostsIndexRouteImport.update({
+    id: '/posts/',
+    path: '/posts/',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardPostsPostIdRoute =
+  AdminDashboardPostsPostIdRouteImport.update({
+    id: '/posts/$postId',
+    path: '/posts/$postId',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardProjectsIndexRoute =
+  AdminDashboardProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardProjectsProjectIdRoute =
+  AdminDashboardProjectsProjectIdRouteImport.update({
+    id: '/projects/$projectId',
+    path: '/projects/$projectId',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PrimaryIndexRoute
@@ -178,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof PrimaryContactRoute
   '/admin': typeof AdminDashboardRouteWithChildren
   '/admin/forgot-password': typeof AdminForgotPasswordRoute
+  '/admin/guide.html': typeof AdminGuideDothtmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
@@ -186,14 +209,16 @@ export interface FileRoutesByFullPath {
   '/admin/content': typeof AdminDashboardContentRoute
   '/admin/experience': typeof AdminDashboardExperienceRoute
   '/admin/inquiries': typeof AdminDashboardInquiriesRoute
-  '/admin/posts': typeof AdminDashboardPostsRoute
-  '/admin/projects': typeof AdminDashboardProjectsRoute
   '/admin/settings': typeof AdminDashboardSettingsRoute
   '/admin/stack': typeof AdminDashboardStackRoute
   '/admin/testimonials': typeof AdminDashboardTestimonialsRoute
   '/work/': typeof PrimaryWorkIndexRoute
   '/writing/': typeof PrimaryWritingIndexRoute
   '/admin/': typeof AdminDashboardIndexRoute
+  '/admin/posts/$postId': typeof AdminDashboardPostsPostIdRoute
+  '/admin/projects/$projectId': typeof AdminDashboardProjectsProjectIdRoute
+  '/admin/posts/': typeof AdminDashboardPostsIndexRoute
+  '/admin/projects/': typeof AdminDashboardProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/resume': typeof ResumeRoute
@@ -203,6 +228,7 @@ export interface FileRoutesByTo {
   '/about': typeof PrimaryAboutRoute
   '/contact': typeof PrimaryContactRoute
   '/admin/forgot-password': typeof AdminForgotPasswordRoute
+  '/admin/guide.html': typeof AdminGuideDothtmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
@@ -212,14 +238,16 @@ export interface FileRoutesByTo {
   '/admin/content': typeof AdminDashboardContentRoute
   '/admin/experience': typeof AdminDashboardExperienceRoute
   '/admin/inquiries': typeof AdminDashboardInquiriesRoute
-  '/admin/posts': typeof AdminDashboardPostsRoute
-  '/admin/projects': typeof AdminDashboardProjectsRoute
   '/admin/settings': typeof AdminDashboardSettingsRoute
   '/admin/stack': typeof AdminDashboardStackRoute
   '/admin/testimonials': typeof AdminDashboardTestimonialsRoute
   '/work': typeof PrimaryWorkIndexRoute
   '/writing': typeof PrimaryWritingIndexRoute
   '/admin': typeof AdminDashboardIndexRoute
+  '/admin/posts/$postId': typeof AdminDashboardPostsPostIdRoute
+  '/admin/projects/$projectId': typeof AdminDashboardProjectsProjectIdRoute
+  '/admin/posts': typeof AdminDashboardPostsIndexRoute
+  '/admin/projects': typeof AdminDashboardProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -232,6 +260,7 @@ export interface FileRoutesById {
   '/_primary/contact': typeof PrimaryContactRoute
   '/admin/_dashboard': typeof AdminDashboardRouteWithChildren
   '/admin/forgot-password': typeof AdminForgotPasswordRoute
+  '/admin/guide.html': typeof AdminGuideDothtmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
@@ -241,14 +270,16 @@ export interface FileRoutesById {
   '/admin/_dashboard/content': typeof AdminDashboardContentRoute
   '/admin/_dashboard/experience': typeof AdminDashboardExperienceRoute
   '/admin/_dashboard/inquiries': typeof AdminDashboardInquiriesRoute
-  '/admin/_dashboard/posts': typeof AdminDashboardPostsRoute
-  '/admin/_dashboard/projects': typeof AdminDashboardProjectsRoute
   '/admin/_dashboard/settings': typeof AdminDashboardSettingsRoute
   '/admin/_dashboard/stack': typeof AdminDashboardStackRoute
   '/admin/_dashboard/testimonials': typeof AdminDashboardTestimonialsRoute
   '/_primary/work/': typeof PrimaryWorkIndexRoute
   '/_primary/writing/': typeof PrimaryWritingIndexRoute
   '/admin/_dashboard/': typeof AdminDashboardIndexRoute
+  '/admin/_dashboard/posts/$postId': typeof AdminDashboardPostsPostIdRoute
+  '/admin/_dashboard/projects/$projectId': typeof AdminDashboardProjectsProjectIdRoute
+  '/admin/_dashboard/posts/': typeof AdminDashboardPostsIndexRoute
+  '/admin/_dashboard/projects/': typeof AdminDashboardProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -262,6 +293,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/admin'
     | '/admin/forgot-password'
+    | '/admin/guide.html'
     | '/admin/login'
     | '/admin/reset-password'
     | '/api/keep-alive'
@@ -270,14 +302,16 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/admin/experience'
     | '/admin/inquiries'
-    | '/admin/posts'
-    | '/admin/projects'
     | '/admin/settings'
     | '/admin/stack'
     | '/admin/testimonials'
     | '/work/'
     | '/writing/'
     | '/admin/'
+    | '/admin/posts/$postId'
+    | '/admin/projects/$projectId'
+    | '/admin/posts/'
+    | '/admin/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/resume'
@@ -287,6 +321,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/admin/forgot-password'
+    | '/admin/guide.html'
     | '/admin/login'
     | '/admin/reset-password'
     | '/api/keep-alive'
@@ -296,14 +331,16 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/admin/experience'
     | '/admin/inquiries'
-    | '/admin/posts'
-    | '/admin/projects'
     | '/admin/settings'
     | '/admin/stack'
     | '/admin/testimonials'
     | '/work'
     | '/writing'
     | '/admin'
+    | '/admin/posts/$postId'
+    | '/admin/projects/$projectId'
+    | '/admin/posts'
+    | '/admin/projects'
   id:
     | '__root__'
     | '/_primary'
@@ -315,6 +352,7 @@ export interface FileRouteTypes {
     | '/_primary/contact'
     | '/admin/_dashboard'
     | '/admin/forgot-password'
+    | '/admin/guide.html'
     | '/admin/login'
     | '/admin/reset-password'
     | '/api/keep-alive'
@@ -324,14 +362,16 @@ export interface FileRouteTypes {
     | '/admin/_dashboard/content'
     | '/admin/_dashboard/experience'
     | '/admin/_dashboard/inquiries'
-    | '/admin/_dashboard/posts'
-    | '/admin/_dashboard/projects'
     | '/admin/_dashboard/settings'
     | '/admin/_dashboard/stack'
     | '/admin/_dashboard/testimonials'
     | '/_primary/work/'
     | '/_primary/writing/'
     | '/admin/_dashboard/'
+    | '/admin/_dashboard/posts/$postId'
+    | '/admin/_dashboard/projects/$projectId'
+    | '/admin/_dashboard/posts/'
+    | '/admin/_dashboard/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -342,6 +382,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminDashboardRoute: typeof AdminDashboardRouteWithChildren
   AdminForgotPasswordRoute: typeof AdminForgotPasswordRoute
+  AdminGuideDothtmlRoute: typeof AdminGuideDothtmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminResetPasswordRoute: typeof AdminResetPasswordRoute
   ApiKeepAliveRoute: typeof ApiKeepAliveRoute
@@ -417,6 +458,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/forgot-password'
       fullPath: '/admin/forgot-password'
       preLoaderRoute: typeof AdminForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/guide.html': {
+      id: '/admin/guide.html'
+      path: '/admin/guide.html'
+      fullPath: '/admin/guide.html'
+      preLoaderRoute: typeof AdminGuideDothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/login': {
@@ -496,20 +544,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardInquiriesRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
-    '/admin/_dashboard/posts': {
-      id: '/admin/_dashboard/posts'
-      path: '/posts'
-      fullPath: '/admin/posts'
-      preLoaderRoute: typeof AdminDashboardPostsRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
-    '/admin/_dashboard/projects': {
-      id: '/admin/_dashboard/projects'
-      path: '/projects'
-      fullPath: '/admin/projects'
-      preLoaderRoute: typeof AdminDashboardProjectsRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
     '/admin/_dashboard/settings': {
       id: '/admin/_dashboard/settings'
       path: '/settings'
@@ -529,6 +563,34 @@ declare module '@tanstack/react-router' {
       path: '/testimonials'
       fullPath: '/admin/testimonials'
       preLoaderRoute: typeof AdminDashboardTestimonialsRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/_dashboard/posts/': {
+      id: '/admin/_dashboard/posts/'
+      path: '/posts'
+      fullPath: '/admin/posts/'
+      preLoaderRoute: typeof AdminDashboardPostsIndexRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/_dashboard/posts/$postId': {
+      id: '/admin/_dashboard/posts/$postId'
+      path: '/posts/$postId'
+      fullPath: '/admin/posts/$postId'
+      preLoaderRoute: typeof AdminDashboardPostsPostIdRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/_dashboard/projects/': {
+      id: '/admin/_dashboard/projects/'
+      path: '/projects'
+      fullPath: '/admin/projects/'
+      preLoaderRoute: typeof AdminDashboardProjectsIndexRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/_dashboard/projects/$projectId': {
+      id: '/admin/_dashboard/projects/$projectId'
+      path: '/projects/$projectId'
+      fullPath: '/admin/projects/$projectId'
+      preLoaderRoute: typeof AdminDashboardProjectsProjectIdRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
   }
@@ -561,24 +623,28 @@ interface AdminDashboardRouteChildren {
   AdminDashboardContentRoute: typeof AdminDashboardContentRoute
   AdminDashboardExperienceRoute: typeof AdminDashboardExperienceRoute
   AdminDashboardInquiriesRoute: typeof AdminDashboardInquiriesRoute
-  AdminDashboardPostsRoute: typeof AdminDashboardPostsRoute
-  AdminDashboardProjectsRoute: typeof AdminDashboardProjectsRoute
   AdminDashboardSettingsRoute: typeof AdminDashboardSettingsRoute
   AdminDashboardStackRoute: typeof AdminDashboardStackRoute
   AdminDashboardTestimonialsRoute: typeof AdminDashboardTestimonialsRoute
   AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
+  AdminDashboardPostsPostIdRoute: typeof AdminDashboardPostsPostIdRoute
+  AdminDashboardProjectsProjectIdRoute: typeof AdminDashboardProjectsProjectIdRoute
+  AdminDashboardPostsIndexRoute: typeof AdminDashboardPostsIndexRoute
+  AdminDashboardProjectsIndexRoute: typeof AdminDashboardProjectsIndexRoute
 }
 
 const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
   AdminDashboardContentRoute: AdminDashboardContentRoute,
   AdminDashboardExperienceRoute: AdminDashboardExperienceRoute,
   AdminDashboardInquiriesRoute: AdminDashboardInquiriesRoute,
-  AdminDashboardPostsRoute: AdminDashboardPostsRoute,
-  AdminDashboardProjectsRoute: AdminDashboardProjectsRoute,
   AdminDashboardSettingsRoute: AdminDashboardSettingsRoute,
   AdminDashboardStackRoute: AdminDashboardStackRoute,
   AdminDashboardTestimonialsRoute: AdminDashboardTestimonialsRoute,
   AdminDashboardIndexRoute: AdminDashboardIndexRoute,
+  AdminDashboardPostsPostIdRoute: AdminDashboardPostsPostIdRoute,
+  AdminDashboardProjectsProjectIdRoute: AdminDashboardProjectsProjectIdRoute,
+  AdminDashboardPostsIndexRoute: AdminDashboardPostsIndexRoute,
+  AdminDashboardProjectsIndexRoute: AdminDashboardProjectsIndexRoute,
 }
 
 const AdminDashboardRouteWithChildren = AdminDashboardRoute._addFileChildren(
@@ -593,6 +659,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminDashboardRoute: AdminDashboardRouteWithChildren,
   AdminForgotPasswordRoute: AdminForgotPasswordRoute,
+  AdminGuideDothtmlRoute: AdminGuideDothtmlRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminResetPasswordRoute: AdminResetPasswordRoute,
   ApiKeepAliveRoute: ApiKeepAliveRoute,

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import AdminLayout from '@/components/layout/admin'
 import { adminSessionQuery } from '@/hooks/api/admin/auth'
+import { dashboardQuery } from '@/hooks/api/admin/dashboard'
 import { settingsQuery } from '@/hooks/api/site'
 import { adminHead, adminHeaders } from '@/lib/admin-route'
 
@@ -26,8 +27,10 @@ export const Route = createFileRoute('/admin/_dashboard')({
 function DashboardShell() {
   const { admin } = Route.useRouteContext()
   const { data: settings } = useQuery(settingsQuery())
+  // Badge counts load in the background; the shell never waits on them.
+  const { data: dashboard } = useQuery(dashboardQuery())
   return (
-    <AdminLayout brand={settings?.brandName ?? 'Esho'} email={admin.email} badges={{ newInquiries: 0 }}>
+    <AdminLayout brand={settings?.brandName ?? 'Esho'} email={admin.email} badges={{ newInquiries: dashboard?.counts.newInquiries ?? 0 }}>
       <Outlet />
     </AdminLayout>
   )

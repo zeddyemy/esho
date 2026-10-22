@@ -34,7 +34,7 @@ export function UnsavedChangesGuard() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => blocker.reset?.()}>Keep editing</AlertDialogCancel>
-          <AlertDialogAction onClick={() => blocker.proceed?.()} className="bg-destructive text-ink hover:bg-destructive/90">
+          <AlertDialogAction onClick={() => blocker.proceed?.()} className="bg-destructive text-white hover:bg-destructive/90">
             Discard changes
           </AlertDialogAction>
         </AlertDialogFooter>
@@ -65,7 +65,7 @@ export function SaveBar({ label = 'Save changes' }: { label?: string }) {
             Discard
           </Button>
           <Button type="submit" disabled={isSubmitting || !canSubmit}>
-            {isSubmitting ? 'Saving…' : label}
+            {isSubmitting ? 'Saving' : label}
           </Button>
         </div>
       </div>

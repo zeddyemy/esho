@@ -1,0 +1,152 @@
+<title>Esho admin guide</title>
+<style>
+  /* One readable column, task-first sections. Mirrors the site's paper/ink/cobalt look. */
+  :root {
+    --bg: #f4f4f2; --surface: #eaeae6; --line: rgb(17 18 20 / 0.12);
+    --fg: #111214; --muted: #5d6067; --accent: #2b3bd9;
+    --display: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f1012; --surface: #17181b; --line: rgb(236 235 230 / 0.1); --fg: #ecebe6; --muted: #9b9da4; --accent: #8f99ff; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 400 1.0625rem/1.65 var(--body); padding: 48px 20px 96px; }
+  .wrap { max-width: 1000px; margin-inline: auto; display: grid; gap: 48px; }
+  @media (min-width: 900px) { .wrap { grid-template-columns: 190px minmax(0, 1fr); gap: 64px; } }
+  header.intro { grid-column: 1 / -1; max-width: 66ch; }
+  h1 { font: 400 clamp(2.4rem, 5vw, 3.4rem)/1.05 var(--display); letter-spacing: -0.02em; margin: 8px 0 16px; }
+  h2 { font: 400 1.9rem/1.15 var(--display); letter-spacing: -0.015em; margin: 0 0 12px; scroll-margin-top: 24px; }
+  h3 { font-size: 1.05rem; margin: 28px 0 8px; }
+  p, li { max-width: 66ch; }
+  .muted { color: var(--muted); }
+  a { color: var(--accent); }
+  nav.toc { font-size: 0.9rem; }
+  @media (min-width: 900px) { nav.toc { position: sticky; top: 32px; align-self: start; } }
+  nav.toc ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  nav.toc a { color: var(--muted); text-decoration: none; }
+  nav.toc a:hover { color: var(--fg); }
+  section { border-top: 1px solid var(--line); padding-top: 32px; margin-bottom: 40px; }
+  ol.steps { padding-left: 1.2em; } ol.steps li { margin-bottom: 6px; }
+  .note { background: var(--surface); border-left: 2px solid var(--accent); padding: 14px 18px; margin: 18px 0; }
+  kbd, code { font: 0.85em ui-monospace, Menlo, monospace; background: var(--surface); padding: 0.1em 0.35em; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  td, th { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; }
+</style>
+<div class="wrap">
+  <header class="intro">
+    <p class="muted">Esho website</p>
+    <h1>Admin guide</h1>
+    <p>Everything on the website that changes often can be edited from the admin at <code>/admin</code>. Changes appear on the live site within about a minute.</p>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <ol>
+      <li><a href="#signin">Signing in</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#pages">Page text</a></li>
+      <li><a href="#about">Experience and stack</a></li>
+      <li><a href="#settings">Settings and résumé</a></li>
+      <li><a href="#enquiries">Enquiries</a></li>
+      <li><a href="#markdown">Formatting text</a></li>
+      <li><a href="#images">Images</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <section id="signin">
+      <h2>Signing in</h2>
+      <ol class="steps">
+        <li>Go to <code>/admin</code> on your website and sign in with your email and password.</li>
+        <li>Forgot it? Choose <em>Forgot password</em>. A reset link is emailed to you. It opens a page where you choose a new password.</li>
+        <li>To change your password while signed in: <strong>Settings</strong>, then <strong>Password</strong> at the bottom.</li>
+      </ol>
+      <p class="note">Passwords need at least 10 characters with a letter and a number. Nobody else can create an account: sign-ups are switched off.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <ol class="steps">
+        <li><strong>Projects</strong> in the sidebar lists everything, in the order shown on the Work page. Drag the handle to reorder.</li>
+        <li>The switch on each row publishes or hides a project. The star features it in <em>Selected work</em> on the homepage.</li>
+        <li><strong>New project</strong> asks for a title, then opens the editor. New projects are drafts until you switch on <em>Published</em>.</li>
+        <li>In the editor: cover image (required to publish), summary, role, year, tags (they power the filter on the Work page), tools, outcomes, links, gallery and the case study write-up.</li>
+        <li>Press <strong>Save project</strong> in the bar at the bottom. Leaving with unsaved changes asks you first.</li>
+      </ol>
+    </section>
+
+    <section id="writing">
+      <h2>Writing</h2>
+      <ol class="steps">
+        <li><strong>Writing</strong> lists articles. Search, sort and filter between published and drafts.</li>
+        <li><strong>New article</strong>, then write in the editor. Use <em>Preview</em> to see it exactly as it will look.</li>
+        <li>Switch on <em>Published</em> and save. The publish date defaults to today. Pick a future date to schedule it.</li>
+        <li>Reading time is worked out for you.</li>
+      </ol>
+      <p class="note">To hide the whole Writing section (page, menu link, homepage block and RSS feed), use <strong>Settings</strong>, <em>On the website</em>.</p>
+    </section>
+
+    <section id="pages">
+      <h2>Page text</h2>
+      <p><strong>Page content</strong> has a tab per page. Each block saves on its own.</p>
+      <table>
+        <tr><th>Tab</th><th>What you can change</th></tr>
+        <tr><td>Homepage</td><td>Headline and buttons, the introduction statement, the capabilities grid (a capability without a photo becomes a dark highlight block), the closing call to action.</td></tr>
+        <tr><td>About</td><td>Heading, introduction, photo, your story, quick facts and working principles.</td></tr>
+        <tr><td>Contact</td><td>Heading, text, response-time note, and the choices in the form's "What do you need?" and "Budget" lists.</td></tr>
+        <tr><td>Work, Writing</td><td>The heading and introduction at the top of those pages.</td></tr>
+      </table>
+    </section>
+
+    <section id="about">
+      <h2>Experience, stack and testimonials</h2>
+      <p><strong>Experience</strong> holds work and education entries. Drag to order them (most recent first). The homepage shows the top three work roles. Leave <em>Ended</em> empty for a current role.</p>
+      <p><strong>Stack</strong> holds the tool groups on the About page. Type a tool and press Enter to add it.</p>
+      <p><strong>Testimonials</strong> are the quotes on the homepage. Keep them short.</p>
+    </section>
+
+    <section id="settings">
+      <h2>Settings and résumé</h2>
+      <ul>
+        <li><strong>Identity</strong>: brand (the big wordmark), your name, role, portrait and optional logo.</li>
+        <li><strong>Availability</strong>: the line at the top of the homepage, and whether you show as open to work.</li>
+        <li><strong>Contact</strong>: email, phone numbers and WhatsApp. Adding a WhatsApp number shows the floating chat button.</li>
+        <li><strong>Social links</strong>: leave a field empty to hide that link.</li>
+        <li><strong>Résumé</strong>: upload a PDF (up to 10 MB). The link <code>/resume</code> always opens the latest one, so you can share it anywhere.</li>
+        <li><strong>On the website</strong>: switch Writing, Testimonials and the résumé download on or off.</li>
+        <li><strong>Search and sharing</strong>: the homepage title, description and preview image used by Google and link previews.</li>
+      </ul>
+    </section>
+
+    <section id="enquiries">
+      <h2>Enquiries</h2>
+      <p>Messages from the contact form arrive in <strong>Enquiries</strong>. The sidebar shows a count of new ones. Opening one marks it as read. <em>Reply by email</em> opens your mail app with a draft and marks it as replied. Archive anything you are done with.</p>
+    </section>
+
+    <section id="markdown">
+      <h2>Formatting text</h2>
+      <p>Case studies, articles and your story use Markdown. The toolbar buttons insert it for you.</p>
+      <table>
+        <tr><th>Type</th><th>Result</th></tr>
+        <tr><td><code>## Heading</code></td><td>Section heading</td></tr>
+        <tr><td><code>**bold**</code>, <code>_italic_</code></td><td><strong>bold</strong>, <em>italic</em></td></tr>
+        <tr><td><code>- item</code></td><td>Bulleted list</td></tr>
+        <tr><td><code>[text](https://link)</code></td><td>Link</td></tr>
+        <tr><td><code>&gt; quote</code></td><td>Pull quote</td></tr>
+        <tr><td>Three backticks and a language, e.g. <code>```python</code></td><td>Highlighted code block</td></tr>
+      </table>
+    </section>
+
+    <section id="images">
+      <h2>Images</h2>
+      <ul>
+        <li>JPG, PNG, WebP or HEIC. Large photos are resized automatically.</li>
+        <li>Add a short description to every image. It helps search engines and screen readers.</li>
+        <li>Replaced or removed images are deleted from storage when you save.</li>
+      </ul>
+    </section>
+  </main>
+</div>

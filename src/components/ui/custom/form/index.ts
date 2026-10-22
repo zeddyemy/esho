@@ -4,6 +4,9 @@ import { fieldContext, formContext } from './context'
 import { SubmitButton, SwitchField, TextField, TextareaField } from './fields'
 import { ImageField, ImageListField } from './image-fields'
 import { SaveBar, UnsavedChangesGuard } from './form-chrome'
+import { FileField } from './file-field'
+import { MarkdownField } from './markdown-field'
+import { DateField, NumberField, SelectField, TagsField } from './more-fields'
 
 /**
  * App-wide TanStack Form hook. Usage:
@@ -14,7 +17,19 @@ import { SaveBar, UnsavedChangesGuard } from './form-chrome'
 export const { useAppForm, withForm } = createFormHook({
   fieldContext,
   formContext,
-  fieldComponents: { TextField, TextareaField, SwitchField, ImageField, ImageListField },
+  fieldComponents: {
+    TextField,
+    TextareaField,
+    SwitchField,
+    ImageField,
+    ImageListField,
+    TagsField,
+    NumberField,
+    DateField,
+    SelectField,
+    MarkdownField,
+    FileField,
+  },
   formComponents: { SubmitButton, SaveBar, UnsavedChangesGuard },
 })
 

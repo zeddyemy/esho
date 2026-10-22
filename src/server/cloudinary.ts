@@ -9,7 +9,7 @@ import { v2 as cloudinary } from 'cloudinary'
 
 import { requireServerEnv } from '@/server/env'
 
-export const CLOUDINARY_ROOT = 'upc'
+export const CLOUDINARY_ROOT = 'esho'
 
 let configured = false
 
@@ -38,7 +38,7 @@ export interface SignedUpload {
   transformation: string
 }
 
-/** Signs a direct browser upload into `upc/<folder>`. Valid for about an hour. */
+/** Signs a direct browser upload into `esho/<folder>`. Valid for about an hour. */
 export function signUpload(folder: string): SignedUpload {
   const c = client()
   const timestamp = Math.round(Date.now() / 1000)

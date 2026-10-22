@@ -52,3 +52,7 @@ export const adminNav: Array<AdminNavGroup> = [
     ],
   },
 ]
+
+/** Tabs on the Page content screen (kept here so the route file stays tiny). */
+export const CONTENT_TABS = ['home', 'about', 'contact', 'work', 'writing'] as const
+export type ContentTab = (typeof CONTENT_TABS)[number]

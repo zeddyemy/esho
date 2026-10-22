@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 
 /** Reads a field's validation messages once it has been blurred or the form submitted. */
-function useFieldErrors() {
+export function useFieldErrors() {
   const field = useFieldContext<unknown>()
   const errors = useStore(field.store, (s) => s.meta.errors)
   const blurred = useStore(field.store, (s) => s.meta.isBlurred)
@@ -50,7 +50,7 @@ export function FieldShell({ label, description, className, children, errors, ht
   )
 }
 
-const inputClass = 'h-11 rounded-md border-line-strong bg-paper-2 px-3 text-base md:text-sm focus-visible:border-cobalt focus-visible:ring-cobalt/30'
+const inputClass = 'h-11 border-line-strong bg-paper-2 px-3 text-base md:text-sm focus-visible:border-cobalt focus-visible:ring-cobalt/30'
 
 export function TextField({
   label,
@@ -128,7 +128,7 @@ export function TextareaField({
 export function SwitchField({ label, description, className }: { label: string; description?: string; className?: string }) {
   const field = useFieldContext<boolean>()
   return (
-    <div className={cn('flex items-start justify-between gap-6 rounded-md border border-line bg-paper-2 p-4', className)}>
+    <div className={cn('flex items-start justify-between gap-6 border border-line bg-paper-2 p-4', className)}>
       <div className="grid gap-1">
         <Label htmlFor={field.name} className="text-sm font-medium text-ink">
           {label}
@@ -147,7 +147,7 @@ export function SwitchField({ label, description, className }: { label: string; 
 
 export function SubmitButton({
   children,
-  pendingLabel = 'Saving…',
+  pendingLabel = 'Saving',
   className,
   disableWhenPristine = false,
 }: {

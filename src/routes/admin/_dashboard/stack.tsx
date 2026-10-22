@@ -1,9 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { ComingSoon } from '@/components/shared/admin/coming-soon'
+import StackPage from '@/components/pages/admin/stack'
+import { adminStackQuery } from '@/hooks/api/admin/catalog'
 import { adminHead } from '@/lib/admin-route'
 
 export const Route = createFileRoute('/admin/_dashboard/stack')({
+  loader: ({ context }) => context.queryClient.ensureQueryData(adminStackQuery()),
   head: () => adminHead('Stack'),
-  component: () => <ComingSoon title="Stack" description="Tool groups shown on the About page." />,
+  component: StackPage,
 })
