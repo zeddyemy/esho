@@ -16,7 +16,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
         <div className="md:col-span-6">
           <a
             href={`mailto:${settings.email}`}
-            className="font-display text-3xl leading-tight break-all text-ink transition-colors hover:text-cobalt sm:text-4xl md:break-normal"
+            className="font-display text-3xl leading-tight break-all text-ink underline decoration-cobalt decoration-4 underline-offset-8 transition-colors hover:text-cobalt sm:text-4xl md:break-normal"
           >
             {settings.email}
           </a>
@@ -70,13 +70,11 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
         </div>
       </div>
 
-      <div className="container-site overflow-x-clip pt-6" aria-hidden>
-        <p style={{ fontVariationSettings: "'opsz' 28" }} className="-mb-[0.06em] font-display text-[30vw] leading-[0.95] tracking-[-0.05em] text-ink select-none md:text-[22vw]">
-          {settings.brandName}
-        </p>
+      <div className="overflow-x-clip bg-cobalt text-cobalt-ink" aria-hidden>
+        <p className="container-site font-poster py-4 text-[24vw] leading-[0.82] select-none md:text-[19vw]">{settings.brandName}</p>
       </div>
 
-      <div className="container-site flex flex-col gap-1 border-t border-line py-6 text-sm text-mute md:flex-row md:justify-between">
+      <div className="container-site flex flex-col gap-1 py-6 text-sm text-mute md:flex-row md:justify-between">
         <p>
           © {year} {settings.ownerName}
         </p>

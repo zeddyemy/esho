@@ -1,8 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@import '@fontsource-variable/newsreader/opsz.css';
-@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource-variable/archivo/wdth.css';
 @import '@fontsource-variable/geist/wght.css';
 @import '@fontsource-variable/geist-mono/wght.css';
 
@@ -10,23 +9,24 @@
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /*
- * "Editorial engineer" design tokens.
- * Cool off-white paper and ink with one cobalt accent. Dark mode inverts the
- * neutrals and lifts the accent so it keeps AA contrast. Corners are sharp
- * everywhere (radius 0) except pills and avatars.
+ * "Bold studio" design tokens (alternate design, branch design/bold-studio).
+ * Neutral off-white and near-black with one signal-orange accent used as
+ * colour blocks. Token names are shared with the editorial design (the
+ * accent keeps the name "cobalt") so every component works on both branches.
+ * Text on the accent is always ink. Corners are sharp everywhere.
  */
 :root {
-  --paper: #f4f4f2;
-  --paper-2: #eaeae6;
-  --paper-3: #deded9;
-  --ink: #111214;
-  --ink-2: #33353a;
-  --mute: #5d6067; /* 5.9:1 on paper */
-  --line: rgb(17 18 20 / 0.12);
-  --line-strong: rgb(17 18 20 / 0.24);
-  --cobalt: #2b3bd9; /* 7.4:1 on paper */
-  --cobalt-ink: #f4f4f2;
-  --cobalt-soft: rgb(43 59 217 / 0.08);
+  --paper: #f1f1ef;
+  --paper-2: #e6e6e3;
+  --paper-3: #d9d9d5;
+  --ink: #0c0c0c;
+  --ink-2: #2b2b2b;
+  --mute: #5b5b5b; /* 6.2:1 on paper */
+  --line: rgb(12 12 12 / 0.14);
+  --line-strong: rgb(12 12 12 / 0.3);
+  --cobalt: #ff5a1f; /* accent block; ink text on it is 7.1:1 */
+  --cobalt-ink: #0c0c0c;
+  --cobalt-soft: rgb(255 90 31 / 0.1);
 
   color-scheme: light;
 }
@@ -34,33 +34,33 @@
 /* No-JS fallback follows the system; the inline script normally sets data-theme. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --paper: #0f1012;
-    --paper-2: #17181b;
-    --paper-3: #222328;
-    --ink: #ecebe6;
-    --ink-2: #c9c9c4;
-    --mute: #9b9da4;
-    --line: rgb(236 235 230 / 0.1);
-    --line-strong: rgb(236 235 230 / 0.2);
-    --cobalt: #8f99ff;
-    --cobalt-ink: #0f1012;
-    --cobalt-soft: rgb(143 153 255 / 0.1);
+    --paper: #0c0c0c;
+    --paper-2: #161616;
+    --paper-3: #222222;
+    --ink: #f1f1ef;
+    --ink-2: #cfcfcc;
+    --mute: #9c9c99;
+    --line: rgb(241 241 239 / 0.12);
+    --line-strong: rgb(241 241 239 / 0.26);
+    --cobalt: #ff6a33;
+    --cobalt-ink: #0c0c0c;
+    --cobalt-soft: rgb(255 106 51 / 0.12);
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --paper: #0f1012;
-  --paper-2: #17181b;
-  --paper-3: #222328;
-  --ink: #ecebe6;
-  --ink-2: #c9c9c4;
-  --mute: #9b9da4; /* 7.1:1 on paper */
-  --line: rgb(236 235 230 / 0.1);
-  --line-strong: rgb(236 235 230 / 0.2);
-  --cobalt: #8f99ff; /* 7.3:1 on paper */
-  --cobalt-ink: #0f1012;
-  --cobalt-soft: rgb(143 153 255 / 0.1);
+  --paper: #0c0c0c;
+  --paper-2: #161616;
+  --paper-3: #222222;
+  --ink: #f1f1ef;
+  --ink-2: #cfcfcc;
+  --mute: #9c9c99; /* 7.2:1 on paper */
+  --line: rgb(241 241 239 / 0.12);
+  --line-strong: rgb(241 241 239 / 0.26);
+  --cobalt: #ff6a33;
+  --cobalt-ink: #0c0c0c;
+  --cobalt-soft: rgb(255 106 51 / 0.12);
   color-scheme: dark;
 }
 
@@ -97,7 +97,7 @@
 }
 
 @theme inline {
-  --font-display: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --font-display: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
 
@@ -197,12 +197,21 @@
   }
 }
 
-/* Display serif: the optical-size axis keeps large headings crisp and tight. */
+/* Display grotesk: Archivo's width axis, set wide and heavy. */
 @utility font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  letter-spacing: -0.022em;
+  font-stretch: 112%;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+/* Poster type for the hero and footer: widest, heaviest, uppercase. */
+@utility font-poster {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
 }
 
 /* Small mono metadata (years, stack, indices). Not used as section eyebrows. */
@@ -250,8 +259,9 @@
   }
   & h2 {
     font-family: var(--font-display);
-    font-optical-sizing: auto;
-    letter-spacing: -0.02em;
+    font-stretch: 112%;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     color: var(--ink);
     font-size: 1.875rem;
     line-height: 1.15;
@@ -304,9 +314,10 @@
     margin-top: 0.4em;
   }
   & blockquote {
-    border-left: 2px solid var(--cobalt);
+    border-left: 4px solid var(--cobalt);
     padding-left: 1.25em;
     font-family: var(--font-display);
+    font-weight: 600;
     font-size: 1.375rem;
     line-height: 1.4;
     color: var(--ink);
@@ -431,4 +442,18 @@
       animation-range: entry var(--reveal-start, 0%) entry calc(var(--reveal-start, 0%) + 45%);
     }
   }
+}
+
+/* One marquee per page (the stack band on the homepage). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 40s linear infinite;
 }

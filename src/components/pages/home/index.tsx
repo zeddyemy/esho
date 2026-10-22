@@ -7,9 +7,10 @@ import Hero from './hero'
 import Intro from './intro'
 import LatestWriting from './latest-writing'
 import SelectedWork from './selected-work'
+import StackMarquee from './stack-marquee'
 import Testimonials from './testimonials'
 import { postsQuery, projectsQuery } from '@/hooks/api/content'
-import { experiencesQuery, homeContentQuery, settingsQuery, testimonialsQuery } from '@/hooks/api/site'
+import { experiencesQuery, homeContentQuery, settingsQuery, stackGroupsQuery, testimonialsQuery } from '@/hooks/api/site'
 
 /** Featured projects lead; if none are featured, the first four are shown. */
 const FEATURED_FALLBACK = 4
@@ -21,6 +22,7 @@ export default function Home() {
   const { data: experiences } = useSuspenseQuery(experiencesQuery())
   const { data: testimonials } = useSuspenseQuery(testimonialsQuery())
   const { data: posts } = useSuspenseQuery(postsQuery({ limit: 3 }))
+  const { data: stack } = useSuspenseQuery(stackGroupsQuery())
 
   const featured = projects.filter((p) => p.featured)
   const selected = featured.length ? featured : projects.slice(0, FEATURED_FALLBACK)
@@ -28,6 +30,7 @@ export default function Home() {
   return (
     <>
       <Hero content={content.hero} settings={settings} />
+      <StackMarquee items={[...new Set(stack.flatMap((g) => g.items))].slice(0, 24)} />
       <Intro content={content.intro} />
       <SelectedWork projects={selected} total={projects.length} />
       <Capabilities content={content.capabilities} />

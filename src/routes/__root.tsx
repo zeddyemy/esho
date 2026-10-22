@@ -3,7 +3,7 @@ import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/reac
 import type { QueryClient } from '@tanstack/react-query'
 
 import appCss from '@/styles.css?url'
-import displayFont from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url'
+import displayFont from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url'
 import bodyFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
 import { themeInitScript } from '@/components/shared/theme-toggle'
 
@@ -27,8 +27,8 @@ export const Route = createRootRouteWithContext<RouterContext>()({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-      { name: 'theme-color', content: '#f4f4f2', media: '(prefers-color-scheme: light)' },
-      { name: 'theme-color', content: '#0f1012', media: '(prefers-color-scheme: dark)' },
+      { name: 'theme-color', content: '#f1f1ef', media: '(prefers-color-scheme: light)' },
+      { name: 'theme-color', content: '#0c0c0c', media: '(prefers-color-scheme: dark)' },
       { name: 'format-detection', content: 'telephone=no' },
       { title: 'Esho' },
       // Google Search Console ownership (optional; DNS verification also works).
