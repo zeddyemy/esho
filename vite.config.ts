@@ -14,6 +14,8 @@ const config = defineConfig({
   plugins: [
     devtools(),
     nitro({
+      // Pre-compressed (gzip + brotli) static assets for Node hosts such as Render or Railway.
+      compressPublicAssets: true,
       vercel: {
         config: {
           version: 3,

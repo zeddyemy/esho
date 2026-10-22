@@ -14,7 +14,6 @@ export function Logo({
   return (
     <Link
       to="/"
-      aria-label={`${settings.brandName}, ${settings.ownerName}. Home`}
       className={cn('group inline-flex items-center gap-2.5', className)}
     >
       {settings.logo ? (
@@ -32,6 +31,7 @@ export function Logo({
         </span>
         <span className="text-meta mt-1 text-[0.6875rem] text-mute">{settings.ownerName}</span>
       </span>
+      <span className="sr-only">, home</span>
     </Link>
   )
 }

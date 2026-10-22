@@ -52,7 +52,7 @@ export default function Hero({ content, settings }: { content: HeroContent; sett
                 <span className="block font-semibold">{settings.ownerName}</span>
                 <span className="block opacity-80">{settings.roleTitle}</span>
               </figcaption>
-              <div className="animate-clip-reveal relative aspect-[4/5] w-40 shrink-0 md:w-52" style={{ animationDelay: '0.2s' }}>
+              <div className="animate-fade-up relative aspect-[4/5] w-40 shrink-0 md:w-52" style={{ animationDelay: '0.2s' }}>
                 <MediaImage image={settings.portrait} fill priority sizes="208px" imgClassName="object-[50%_30%] grayscale" />
               </div>
             </figure>

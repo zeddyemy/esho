@@ -48,7 +48,7 @@ export default function Testimonials({ items }: { items: Array<Testimonial> }) {
                   type="button"
                   onClick={() => setIndex(i)}
                   aria-pressed={i === index}
-                  aria-label={`Testimonial from ${item.name}`}
+                  aria-label={`${indexLabel(i)}, testimonial from ${item.name}`}
                   className={cn(
                     'text-meta flex h-9 min-w-12 items-center justify-center border px-3 transition-colors',
                     i === index ? 'border-ink bg-ink text-paper' : 'border-line-strong text-mute hover:border-ink hover:text-ink',
