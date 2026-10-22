@@ -25,7 +25,7 @@ export default function CaseStudy({ project, bodyHtml }: { project: Project; bod
       ) : null}
 
       <section className={cn('container-site grid gap-12 pb-16 md:grid-cols-12 md:pb-24', !project.metrics.length && 'pt-16 md:pt-24')}>
-        <aside className="md:col-span-3">
+        <aside className="min-w-0 md:col-span-3">
           <div className="md:sticky md:top-28">
             <h2 className="text-sm text-mute">Built with</h2>
             <ul className="text-meta mt-4 flex flex-wrap gap-2 md:flex-col md:gap-1.5">
@@ -37,7 +37,7 @@ export default function CaseStudy({ project, bodyHtml }: { project: Project; bod
             </ul>
           </div>
         </aside>
-        <div className="prose-editorial max-w-[68ch] md:col-span-8 md:col-start-5" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+        <div className="prose-editorial max-w-[68ch] min-w-0 md:col-span-8 md:col-start-5" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
       </section>
 
       {project.gallery.length ? (

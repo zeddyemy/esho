@@ -7,7 +7,7 @@ export default function Story({ storyHtml, principles }: { storyHtml: string; pr
     <section className="border-t border-line py-20 md:py-28">
       <div className="container-site grid gap-12 md:grid-cols-12">
         <h2 className="font-display text-3xl tracking-[-0.02em] md:col-span-4 md:text-4xl">The longer version</h2>
-        <Reveal className="md:col-span-7 md:col-start-6">
+        <Reveal className="min-w-0 md:col-span-7 md:col-start-6">
           <div className="prose-editorial text-lg" dangerouslySetInnerHTML={{ __html: storyHtml }} />
         </Reveal>
       </div>
