@@ -1,0 +1,434 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@import '@fontsource-variable/newsreader/opsz.css';
+@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource-variable/geist/wght.css';
+@import '@fontsource-variable/geist-mono/wght.css';
+
+/* Theme is resolved before paint by the inline script in __root.tsx. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * "Editorial engineer" design tokens.
+ * Cool off-white paper and ink with one cobalt accent. Dark mode inverts the
+ * neutrals and lifts the accent so it keeps AA contrast. Corners are sharp
+ * everywhere (radius 0) except pills and avatars.
+ */
+:root {
+  --paper: #f4f4f2;
+  --paper-2: #eaeae6;
+  --paper-3: #deded9;
+  --ink: #111214;
+  --ink-2: #33353a;
+  --mute: #5d6067; /* 5.9:1 on paper */
+  --line: rgb(17 18 20 / 0.12);
+  --line-strong: rgb(17 18 20 / 0.24);
+  --cobalt: #2b3bd9; /* 7.4:1 on paper */
+  --cobalt-ink: #f4f4f2;
+  --cobalt-soft: rgb(43 59 217 / 0.08);
+
+  color-scheme: light;
+}
+
+/* No-JS fallback follows the system; the inline script normally sets data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #0f1012;
+    --paper-2: #17181b;
+    --paper-3: #222328;
+    --ink: #ecebe6;
+    --ink-2: #c9c9c4;
+    --mute: #9b9da4;
+    --line: rgb(236 235 230 / 0.1);
+    --line-strong: rgb(236 235 230 / 0.2);
+    --cobalt: #8f99ff;
+    --cobalt-ink: #0f1012;
+    --cobalt-soft: rgb(143 153 255 / 0.1);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #0f1012;
+  --paper-2: #17181b;
+  --paper-3: #222328;
+  --ink: #ecebe6;
+  --ink-2: #c9c9c4;
+  --mute: #9b9da4; /* 7.1:1 on paper */
+  --line: rgb(236 235 230 / 0.1);
+  --line-strong: rgb(236 235 230 / 0.2);
+  --cobalt: #8f99ff; /* 7.3:1 on paper */
+  --cobalt-ink: #0f1012;
+  --cobalt-soft: rgb(143 153 255 / 0.1);
+  color-scheme: dark;
+}
+
+:root {
+  --radius: 0rem;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--mute);
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: #c8341f;
+  --border: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--cobalt);
+
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper-2);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--cobalt);
+}
+
+@theme inline {
+  --font-display: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-ink: var(--cobalt-ink);
+  --color-cobalt-soft: var(--cobalt-soft);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background: var(--cobalt);
+    color: var(--cobalt-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cobalt);
+    outline-offset: 3px;
+  }
+}
+
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1360px;
+  padding-inline: 1rem;
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+  @variant lg {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Display serif: the optical-size axis keeps large headings crisp and tight. */
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+}
+
+/* Small mono metadata (years, stack, indices). Not used as section eyebrows. */
+@utility text-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s var(--ease-out-expo);
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@utility link-static {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--line-strong);
+  transition: text-decoration-color 0.3s;
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/*
+ * Long-form content (case studies, posts, about story). Markdown HTML comes
+ * from the server renderer, so it is styled here rather than with classes.
+ */
+@utility prose-editorial {
+  color: var(--ink-2);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+
+  & > * + * {
+    margin-top: 1.25em;
+  }
+  & h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-size: 1.875rem;
+    line-height: 1.15;
+    margin-top: 2.25em;
+    scroll-margin-top: 6rem;
+  }
+  & h3 {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-top: 2em;
+  }
+  & h2 + *,
+  & h3 + * {
+    margin-top: 0.75em;
+  }
+  & a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--cobalt);
+    text-underline-offset: 0.2em;
+  }
+  & strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  & ul,
+  & ol {
+    padding-left: 1.25em;
+  }
+  & ul {
+    list-style: none;
+  }
+  & ul > li {
+    position: relative;
+  }
+  & ul > li::before {
+    content: '';
+    position: absolute;
+    left: -1.1em;
+    top: 0.8em;
+    width: 0.5em;
+    height: 1px;
+    background: var(--cobalt);
+  }
+  & ol {
+    list-style: decimal;
+  }
+  & li + li {
+    margin-top: 0.4em;
+  }
+  & blockquote {
+    border-left: 2px solid var(--cobalt);
+    padding-left: 1.25em;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  & :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--paper-2);
+    padding: 0.15em 0.35em;
+  }
+  & pre {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+  }
+  & img {
+    width: 100%;
+    height: auto;
+  }
+  & hr {
+    border-color: var(--line);
+    margin-block: 2.5em;
+  }
+}
+
+/* Shiki dual themes: colours are CSS variables, switched with the page theme. */
+.prose-editorial pre.shiki,
+.prose-editorial pre.shiki span {
+  color: var(--shiki-light);
+}
+[data-theme='dark'] .prose-editorial pre.shiki,
+[data-theme='dark'] .prose-editorial pre.shiki span {
+  color: var(--shiki-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Above-the-fold entrance animations run in CSS so they start at first paint,
+ * before hydration. They begin at a near-zero (not zero) opacity so browsers
+ * count the text as painted for LCP.
+ */
+@keyframes word-rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0.01;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes clip-reveal {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up 0.9s var(--ease-out-expo) both;
+}
+
+@utility animate-clip-reveal {
+  animation: clip-reveal 1.2s var(--ease-out-expo) both;
+}
+
+/* Small uppercase mono label for admin UI (public pages avoid eyebrows). */
+@utility text-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/*
+ * Scroll-driven reveal (see Reveal component). Only where supported and when
+ * motion is welcome; otherwise elements are simply visible.
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 28px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry var(--reveal-start, 0%) entry calc(var(--reveal-start, 0%) + 45%);
+    }
+  }
+}

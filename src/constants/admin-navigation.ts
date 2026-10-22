@@ -1,0 +1,54 @@
+import {
+  BookOpenText,
+  Briefcase,
+  FileText,
+  FolderKanban,
+  Inbox,
+  Layers,
+  LayoutDashboard,
+  MessageSquareQuote,
+  Settings,
+} from 'lucide-react'
+import type { LinkProps } from '@tanstack/react-router'
+import type { LucideIcon } from 'lucide-react'
+
+export interface AdminNavItem {
+  label: string
+  to: LinkProps['to']
+  icon: LucideIcon
+  /** Exact match for the dashboard so it isn't "active" on every admin page. */
+  exact?: boolean
+  badge?: 'newInquiries'
+}
+
+export interface AdminNavGroup {
+  label: string
+  items: Array<AdminNavItem>
+}
+
+export const adminNav: Array<AdminNavGroup> = [
+  {
+    label: 'Overview',
+    items: [
+      { label: 'Dashboard', to: '/admin', icon: LayoutDashboard, exact: true },
+      { label: 'Enquiries', to: '/admin/inquiries', icon: Inbox, badge: 'newInquiries' },
+    ],
+  },
+  {
+    label: 'Content',
+    items: [
+      { label: 'Projects', to: '/admin/projects', icon: FolderKanban },
+      { label: 'Writing', to: '/admin/posts', icon: BookOpenText },
+      { label: 'Experience', to: '/admin/experience', icon: Briefcase },
+      { label: 'Stack', to: '/admin/stack', icon: Layers },
+      { label: 'Testimonials', to: '/admin/testimonials', icon: MessageSquareQuote },
+    ],
+  },
+  {
+    label: 'Website',
+    items: [
+      { label: 'Page content', to: '/admin/content', icon: FileText },
+      { label: 'Settings', to: '/admin/settings', icon: Settings },
+    ],
+  },
+]
