@@ -1,5 +1,6 @@
 import GeneralSettings from './general'
 import SecuritySettings from './security'
+import StorageCleanup from './storage'
 import { AdminPageHeader } from '@/components/shared/admin/page-header'
 
 export default function Settings({ email }: { email: string }) {
@@ -9,6 +10,9 @@ export default function Settings({ email }: { email: string }) {
       <GeneralSettings />
       <div className="mt-12 border-t border-line pt-10">
         <SecuritySettings email={email} />
+      </div>
+      <div className="mt-8">
+        <StorageCleanup />
       </div>
     </div>
   )

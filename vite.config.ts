@@ -20,7 +20,11 @@ const config = defineConfig({
         config: {
           version: 3,
           // Keeps the free Supabase project active (it pauses after 7 idle days).
-          crons: [{ path: '/api/keep-alive', schedule: '0 6 */3 * *' }],
+          crons: [
+            { path: '/api/keep-alive', schedule: '0 6 */3 * *' },
+            // Weekly: delete uploads nothing uses any more (needs CRON_SECRET).
+            { path: '/api/cleanup-media', schedule: '0 4 * * 1' },
+          ],
         },
       },
     }),
