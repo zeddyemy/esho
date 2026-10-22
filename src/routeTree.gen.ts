@@ -22,6 +22,7 @@ import { Route as AdminForgotPasswordRouteImport } from './routes/admin/forgot-p
 import { Route as AdminGuideDothtmlRouteImport } from './routes/admin/guide[.]html'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
+import { Route as ApiCleanupMediaRouteImport } from './routes/api/cleanup-media'
 import { Route as ApiKeepAliveRouteImport } from './routes/api/keep-alive'
 import { Route as PrimaryWorkIndexRouteImport } from './routes/_primary/work.index'
 import { Route as PrimaryWorkSlugRouteImport } from './routes/_primary/work.$slug'
@@ -101,6 +102,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
 const AdminResetPasswordRoute = AdminResetPasswordRouteImport.update({
   id: '/admin/reset-password',
   path: '/admin/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCleanupMediaRoute = ApiCleanupMediaRouteImport.update({
+  id: '/api/cleanup-media',
+  path: '/api/cleanup-media',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiKeepAliveRoute = ApiKeepAliveRouteImport.update({
@@ -203,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/admin/guide.html': typeof AdminGuideDothtmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
+  '/api/cleanup-media': typeof ApiCleanupMediaRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
   '/work/$slug': typeof PrimaryWorkSlugRoute
   '/writing/$slug': typeof PrimaryWritingSlugRoute
@@ -231,6 +238,7 @@ export interface FileRoutesByTo {
   '/admin/guide.html': typeof AdminGuideDothtmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
+  '/api/cleanup-media': typeof ApiCleanupMediaRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
   '/': typeof PrimaryIndexRoute
   '/work/$slug': typeof PrimaryWorkSlugRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/admin/guide.html': typeof AdminGuideDothtmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
+  '/api/cleanup-media': typeof ApiCleanupMediaRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
   '/_primary/': typeof PrimaryIndexRoute
   '/_primary/work/$slug': typeof PrimaryWorkSlugRoute
@@ -296,6 +305,7 @@ export interface FileRouteTypes {
     | '/admin/guide.html'
     | '/admin/login'
     | '/admin/reset-password'
+    | '/api/cleanup-media'
     | '/api/keep-alive'
     | '/work/$slug'
     | '/writing/$slug'
@@ -324,6 +334,7 @@ export interface FileRouteTypes {
     | '/admin/guide.html'
     | '/admin/login'
     | '/admin/reset-password'
+    | '/api/cleanup-media'
     | '/api/keep-alive'
     | '/'
     | '/work/$slug'
@@ -355,6 +366,7 @@ export interface FileRouteTypes {
     | '/admin/guide.html'
     | '/admin/login'
     | '/admin/reset-password'
+    | '/api/cleanup-media'
     | '/api/keep-alive'
     | '/_primary/'
     | '/_primary/work/$slug'
@@ -385,6 +397,7 @@ export interface RootRouteChildren {
   AdminGuideDothtmlRoute: typeof AdminGuideDothtmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminResetPasswordRoute: typeof AdminResetPasswordRoute
+  ApiCleanupMediaRoute: typeof ApiCleanupMediaRoute
   ApiKeepAliveRoute: typeof ApiKeepAliveRoute
 }
 
@@ -479,6 +492,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/reset-password'
       fullPath: '/admin/reset-password'
       preLoaderRoute: typeof AdminResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/cleanup-media': {
+      id: '/api/cleanup-media'
+      path: '/api/cleanup-media'
+      fullPath: '/api/cleanup-media'
+      preLoaderRoute: typeof ApiCleanupMediaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/keep-alive': {
@@ -662,6 +682,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminGuideDothtmlRoute: AdminGuideDothtmlRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminResetPasswordRoute: AdminResetPasswordRoute,
+  ApiCleanupMediaRoute: ApiCleanupMediaRoute,
   ApiKeepAliveRoute: ApiKeepAliveRoute,
 }
 export const routeTree = rootRouteImport
