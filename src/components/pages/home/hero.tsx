@@ -56,7 +56,7 @@ export default function Hero({ content, settings }: { content: HeroContent; sett
       {settings.portrait ? (
         <figure className="lg:col-span-4">
           <div
-            className="animate-clip-reveal relative aspect-[4/5] max-h-[68dvh] w-full max-lg:max-w-sm"
+            className="animate-fade-up relative aspect-[4/5] max-h-[68dvh] w-full max-lg:max-w-sm"
             style={{ animationDelay: '0.15s' }}
           >
             <MediaImage
