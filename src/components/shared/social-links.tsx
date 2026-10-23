@@ -1,16 +1,8 @@
+import { SOCIAL_LABELS } from '@/constants/socials'
 import { SOCIAL_KEYS } from '@/types'
 import { cn } from '@/lib/utils'
-import type { SocialKey, SocialLinks as Socials } from '@/types'
+import type { SocialLinks as Socials } from '@/types'
 
-export const SOCIAL_LABELS: Record<SocialKey, string> = {
-  github: 'GitHub',
-  linkedin: 'LinkedIn',
-  x: 'X',
-  instagram: 'Instagram',
-  youtube: 'YouTube',
-  dribbble: 'Dribbble',
-  medium: 'Medium',
-}
 
 /** Text links keep the editorial tone and avoid brand-icon licensing issues. */
 export function SocialLinks({

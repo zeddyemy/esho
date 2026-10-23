@@ -18,9 +18,18 @@ export const Route = createFileRoute('/_primary/work/$slug')({
     const { project, settings } = loaderData
     const path = `/work/${params.slug}`
     return {
-      ...seo({ settings, title: project.title, description: project.summary, image: project.cover, path, type: 'article' }),
+      ...seo({
+        settings,
+        title: project.title,
+        description: project.summary,
+        ogPath: `/og/work/${params.slug}`,
+        path,
+        type: 'article',
+        modifiedAt: project.updatedAt,
+        tags: [...project.tags, ...project.stack],
+      }),
       scripts: [
-        jsonLd(projectJsonLd(project)),
+        jsonLd(projectJsonLd(project, settings)),
         jsonLd(
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },

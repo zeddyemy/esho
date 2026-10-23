@@ -33,7 +33,13 @@ const list = <T>(value: unknown): Array<T> => (Array.isArray(value) ? (value as 
 const PLACEHOLDER_COVER = (alt: string): ImageAsset => ({ src: '', width: 16, height: 10, alt })
 
 export function toSettings(row: Tables<'site_settings'>): SiteSettings {
-  const seo = (row.seo ?? {}) as { title?: string; description?: string; image?: unknown }
+  const seo = (row.seo ?? {}) as {
+    title?: string
+    description?: string
+    image?: unknown
+    googleVerification?: string
+    bingVerification?: string
+  }
   return {
     brandName: row.brand_name,
     ownerName: row.owner_name,
@@ -55,9 +61,11 @@ export function toSettings(row: Tables<'site_settings'>): SiteSettings {
     showResume: row.show_resume,
     appearance: normalizeAppearance(row.appearance),
     seo: {
-      title: seo.title || `${row.brand_name} | ${row.owner_name}`,
+      title: seo.title || `${row.owner_name} | ${row.role_title}`,
       description: seo.description ?? '',
       image: image(seo.image),
+      googleVerification: seo.googleVerification ?? '',
+      bingVerification: seo.bingVerification ?? '',
     },
   }
 }
@@ -79,6 +87,7 @@ export function toProjectSummary(row: Omit<Tables<'projects'>, 'body' | 'gallery
     featured: row.featured,
     published: row.published,
     sortOrder: row.sort_order,
+    updatedAt: row.updated_at,
   }
 }
 
@@ -96,6 +105,7 @@ export function toPostSummary(row: Omit<Tables<'posts'>, 'body'>): PostSummary {
     tags: row.tags,
     published: row.published,
     publishedAt: row.published_at,
+    updatedAt: row.updated_at,
     readingMinutes: row.reading_minutes,
   }
 }

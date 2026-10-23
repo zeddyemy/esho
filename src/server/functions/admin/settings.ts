@@ -15,7 +15,7 @@ export const getAdminSettings = createServerFn({ method: 'GET' })
     const { data, error } = await db.from('site_settings').select('*').eq('id', 1).single()
     if (error) throw new Error(error.message)
     const s = toSettings(data)
-    const seo = (data.seo ?? {}) as { title?: string; description?: string }
+    const seo = (data.seo ?? {}) as { title?: string; description?: string; googleVerification?: string; bingVerification?: string }
     return {
       brandName: s.brandName,
       ownerName: s.ownerName,
@@ -44,7 +44,13 @@ export const getAdminSettings = createServerFn({ method: 'GET' })
       showTestimonials: s.showTestimonials,
       showResume: s.showResume,
       // Raw values: an empty title means "use the default" on the public site.
-      seo: { title: seo.title ?? '', description: seo.description ?? '', image: s.seo.image },
+      seo: {
+        title: seo.title ?? '',
+        description: seo.description ?? '',
+        image: s.seo.image,
+        googleVerification: seo.googleVerification ?? '',
+        bingVerification: seo.bingVerification ?? '',
+      },
     }
   })
 

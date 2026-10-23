@@ -18,7 +18,7 @@ export const Route = createFileRoute('/_primary/contact')({
   head: ({ loaderData }) => {
     if (!loaderData) return {}
     return {
-      ...seo({ settings: loaderData.settings, title: 'Contact', description: loaderData.content.body, path: '/contact' }),
+      ...seo({ settings: loaderData.settings, title: 'Contact', description: loaderData.content.body, path: '/contact', ogPath: '/og/page/contact' }),
       scripts: [jsonLd(breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]))],
     }
   },

@@ -13,6 +13,7 @@ export const seedPosts: Array<Post> = [
     published: true,
     publishedAt: '2026-08-14T09:00:00.000Z',
     readingMinutes: 4,
+    updatedAt: '2026-10-22T00:00:00.000Z',
     body: `The first wallet I built stored the balance as a number on the user row. It worked until two requests updated it at the same time, and a customer was briefly richer than they should have been.
 
 ## Balances are a query, not a column
@@ -47,6 +48,7 @@ If nothing in your product holds value between transactions, you do not need thi
     published: true,
     publishedAt: '2026-06-02T09:00:00.000Z',
     readingMinutes: 3,
+    updatedAt: '2026-10-22T00:00:00.000Z',
     body: `I have built dashboards nobody opened. They were accurate, fast and quite pretty. They just did not help anyone decide anything.
 
 ## Start from the meeting
@@ -71,6 +73,7 @@ A good dashboard has a handful of numbers and a named person who acts on each on
     published: true,
     publishedAt: '2026-09-20T09:00:00.000Z',
     readingMinutes: 4,
+    updatedAt: '2026-10-22T00:00:00.000Z',
     body: `AI agents write a meaningful share of my code now. They have not made me less careful. They have changed where the care goes.
 
 ## Plans before prompts

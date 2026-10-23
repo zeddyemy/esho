@@ -51,6 +51,7 @@ The product runs my own client sites and is being prepared for a small public be
     featured: true,
     published: true,
     sortOrder: 1,
+    updatedAt: '2026-10-22T00:00:00.000Z',
   },
   {
     id: 'seed-storezed',
@@ -94,6 +95,7 @@ Support tickets about missing money stopped. Finance could close the month from 
     featured: true,
     published: true,
     sortOrder: 2,
+    updatedAt: '2026-10-22T00:00:00.000Z',
   },
   {
     id: 'seed-revenue-insights',
@@ -132,6 +134,7 @@ The Monday spreadsheet ritual ended, and the weekly leadership meeting now start
     featured: true,
     published: true,
     sortOrder: 3,
+    updatedAt: '2026-10-22T00:00:00.000Z',
   },
   {
     id: 'seed-chatcommerce',
@@ -165,6 +168,7 @@ In private testing with a handful of sellers.`,
     featured: false,
     published: true,
     sortOrder: 4,
+    updatedAt: '2026-10-22T00:00:00.000Z',
   },
   {
     id: 'seed-quas',
@@ -203,6 +207,7 @@ def list_orders():
     featured: false,
     published: true,
     sortOrder: 5,
+    updatedAt: '2026-10-22T00:00:00.000Z',
   },
   {
     id: 'seed-kyb',
@@ -232,5 +237,6 @@ An automated check against the company registry during sign-up. Clear matches ar
     featured: false,
     published: true,
     sortOrder: 6,
+    updatedAt: '2026-10-22T00:00:00.000Z',
   },
 ]

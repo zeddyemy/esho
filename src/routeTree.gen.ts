@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PrimaryRouteImport } from './routes/_primary'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
@@ -24,6 +25,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
 import { Route as ApiCleanupMediaRouteImport } from './routes/api/cleanup-media'
 import { Route as ApiKeepAliveRouteImport } from './routes/api/keep-alive'
+import { Route as OgSplatRouteImport } from './routes/og/$'
 import { Route as PrimaryWorkIndexRouteImport } from './routes/_primary/work.index'
 import { Route as PrimaryWorkSlugRouteImport } from './routes/_primary/work.$slug'
 import { Route as PrimaryWritingIndexRouteImport } from './routes/_primary/writing.index'
@@ -43,6 +45,11 @@ import { Route as AdminDashboardProjectsProjectIdRouteImport } from './routes/ad
 
 const PrimaryRoute = PrimaryRouteImport.update({
   id: '/_primary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeRoute = ResumeRouteImport.update({
@@ -113,6 +120,11 @@ const ApiCleanupMediaRoute = ApiCleanupMediaRouteImport.update({
 const ApiKeepAliveRoute = ApiKeepAliveRouteImport.update({
   id: '/api/keep-alive',
   path: '/api/keep-alive',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OgSplatRoute = OgSplatRouteImport.update({
+  id: '/og/$',
+  path: '/og/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrimaryWorkIndexRoute = PrimaryWorkIndexRouteImport.update({
@@ -205,6 +217,7 @@ const AdminDashboardProjectsProjectIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof PrimaryIndexRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/resume': typeof ResumeRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
@@ -218,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/api/cleanup-media': typeof ApiCleanupMediaRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
+  '/og/$': typeof OgSplatRoute
   '/work/$slug': typeof PrimaryWorkSlugRoute
   '/writing/$slug': typeof PrimaryWritingSlugRoute
   '/admin/appearance': typeof AdminDashboardAppearanceRoute
@@ -236,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/admin/projects/': typeof AdminDashboardProjectsIndexRoute
 }
 export interface FileRoutesByTo {
+  '/llms.txt': typeof LlmsDottxtRoute
   '/resume': typeof ResumeRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
@@ -248,6 +263,7 @@ export interface FileRoutesByTo {
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/api/cleanup-media': typeof ApiCleanupMediaRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
+  '/og/$': typeof OgSplatRoute
   '/': typeof PrimaryIndexRoute
   '/work/$slug': typeof PrimaryWorkSlugRoute
   '/writing/$slug': typeof PrimaryWritingSlugRoute
@@ -269,6 +285,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_primary': typeof PrimaryRouteWithChildren
+  '/llms.txt': typeof LlmsDottxtRoute
   '/resume': typeof ResumeRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/rss.xml': typeof RssDotxmlRoute
@@ -282,6 +299,7 @@ export interface FileRoutesById {
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/api/cleanup-media': typeof ApiCleanupMediaRoute
   '/api/keep-alive': typeof ApiKeepAliveRoute
+  '/og/$': typeof OgSplatRoute
   '/_primary/': typeof PrimaryIndexRoute
   '/_primary/work/$slug': typeof PrimaryWorkSlugRoute
   '/_primary/writing/$slug': typeof PrimaryWritingSlugRoute
@@ -304,6 +322,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/llms.txt'
     | '/resume'
     | '/robots.txt'
     | '/rss.xml'
@@ -317,6 +336,7 @@ export interface FileRouteTypes {
     | '/admin/reset-password'
     | '/api/cleanup-media'
     | '/api/keep-alive'
+    | '/og/$'
     | '/work/$slug'
     | '/writing/$slug'
     | '/admin/appearance'
@@ -335,6 +355,7 @@ export interface FileRouteTypes {
     | '/admin/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/llms.txt'
     | '/resume'
     | '/robots.txt'
     | '/rss.xml'
@@ -347,6 +368,7 @@ export interface FileRouteTypes {
     | '/admin/reset-password'
     | '/api/cleanup-media'
     | '/api/keep-alive'
+    | '/og/$'
     | '/'
     | '/work/$slug'
     | '/writing/$slug'
@@ -367,6 +389,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_primary'
+    | '/llms.txt'
     | '/resume'
     | '/robots.txt'
     | '/rss.xml'
@@ -380,6 +403,7 @@ export interface FileRouteTypes {
     | '/admin/reset-password'
     | '/api/cleanup-media'
     | '/api/keep-alive'
+    | '/og/$'
     | '/_primary/'
     | '/_primary/work/$slug'
     | '/_primary/writing/$slug'
@@ -401,6 +425,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   PrimaryRoute: typeof PrimaryRouteWithChildren
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   ResumeRoute: typeof ResumeRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   RssDotxmlRoute: typeof RssDotxmlRoute
@@ -412,6 +437,7 @@ export interface RootRouteChildren {
   AdminResetPasswordRoute: typeof AdminResetPasswordRoute
   ApiCleanupMediaRoute: typeof ApiCleanupMediaRoute
   ApiKeepAliveRoute: typeof ApiKeepAliveRoute
+  OgSplatRoute: typeof OgSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -421,6 +447,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof PrimaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resume': {
@@ -519,6 +552,13 @@ declare module '@tanstack/react-router' {
       path: '/api/keep-alive'
       fullPath: '/api/keep-alive'
       preLoaderRoute: typeof ApiKeepAliveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/og/$': {
+      id: '/og/$'
+      path: '/og/$'
+      fullPath: '/og/$'
+      preLoaderRoute: typeof OgSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_primary/work/': {
@@ -695,6 +735,7 @@ const AdminDashboardRouteWithChildren = AdminDashboardRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   PrimaryRoute: PrimaryRouteWithChildren,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   ResumeRoute: ResumeRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   RssDotxmlRoute: RssDotxmlRoute,
@@ -706,6 +747,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResetPasswordRoute: AdminResetPasswordRoute,
   ApiCleanupMediaRoute: ApiCleanupMediaRoute,
   ApiKeepAliveRoute: ApiKeepAliveRoute,
+  OgSplatRoute: OgSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
