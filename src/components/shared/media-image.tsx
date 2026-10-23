@@ -71,7 +71,7 @@ export function MediaImage({
         }}
         // Always visible: hiding it until hydration delayed LCP by ~1 s. The blur
         // placeholder underneath shows until the photo paints over it.
-        className={cn('relative size-full object-cover transition-transform duration-700 ease-out-expo', imgClassName)}
+        className={cn('relative size-full object-cover duration-700', imgClassName)}
       />
     </div>
   )

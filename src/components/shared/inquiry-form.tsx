@@ -169,7 +169,7 @@ export function InquiryForm({ projectTypes, budgets, defaultType, responseNote, 
           {(isSubmitting) => (
             <Button type="submit" size="lg" disabled={isSubmitting} className="group">
               {isSubmitting ? 'Sending' : 'Send message'}
-              <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight />
             </Button>
           )}
         </form.Subscribe>

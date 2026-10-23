@@ -20,7 +20,7 @@ export default function SelectedWork({ projects, total }: { projects: Array<Proj
           <h2 className="font-display text-5xl uppercase md:text-7xl">Selected work</h2>
           <Link to="/work" className="link-underline group inline-flex items-center gap-1.5 font-medium">
             All projects ({total})
-            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="size-4" />
           </Link>
         </div>
 
@@ -38,7 +38,7 @@ export default function SelectedWork({ projects, total }: { projects: Array<Proj
                       imgClassName="group-hover:scale-[1.04]"
                     />
                   </div>
-                  <div className="flex items-start justify-between gap-6 border-t border-ink p-5 transition-colors duration-300 group-hover:bg-cobalt group-hover:text-cobalt-ink md:p-6">
+                  <div className="flex items-start justify-between gap-6 border-t border-ink p-5 transition-colors group-hover:bg-cobalt group-hover:text-cobalt-ink md:p-6">
                     <div className="min-w-0">
                       <p className="text-meta opacity-70">
                         {indexLabel(i)} / {project.year} / {project.tags.join(', ')}
@@ -46,7 +46,7 @@ export default function SelectedWork({ projects, total }: { projects: Array<Proj
                       <h3 className="mt-2 font-display text-3xl leading-none uppercase md:text-5xl">{project.title}</h3>
                       <p className="mt-3 max-w-xl opacity-80">{project.summary}</p>
                     </div>
-                    <ArrowUpRight className="size-8 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" strokeWidth={1.5} />
+                    <ArrowUpRight className="size-8 shrink-0" strokeWidth={1.5} />
                   </div>
                 </Link>
               </Reveal>

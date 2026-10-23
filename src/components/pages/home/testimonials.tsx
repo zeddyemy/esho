@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { AnimatePresence, m, useReducedMotion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 
+import { useMotionLevel } from '@/components/ui/custom/motion-level'
 import { indexLabel } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { Testimonial } from '@/types'
@@ -8,7 +9,7 @@ import type { Testimonial } from '@/types'
 /** One large quote at a time with numbered switches. */
 export default function Testimonials({ items }: { items: Array<Testimonial> }) {
   const [index, setIndex] = useState(0)
-  const reduce = useReducedMotion()
+  const reduce = useMotionLevel() === 'none'
   if (items.length === 0) return null
   const current = items[Math.min(index, items.length - 1)]
 

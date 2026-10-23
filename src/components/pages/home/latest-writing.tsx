@@ -18,7 +18,7 @@ export default function LatestWriting({ posts }: { posts: Array<PostSummary> }) 
           <h2 className="font-display text-4xl tracking-[-0.025em] md:text-6xl">Latest writing</h2>
           <Link to="/writing" className="link-underline group inline-flex items-center gap-1.5 text-sm">
             All articles
-            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="size-4" />
           </Link>
         </div>
 

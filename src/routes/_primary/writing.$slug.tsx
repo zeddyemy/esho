@@ -22,13 +22,15 @@ export const Route = createFileRoute('/_primary/writing/$slug')({
         settings,
         title: post.title,
         description: post.excerpt,
-        image: post.cover,
+        ogPath: `/og/writing/${params.slug}`,
         path,
         type: 'article',
         publishedAt: post.publishedAt,
+        modifiedAt: post.updatedAt,
+        tags: post.tags,
       }),
       scripts: [
-        jsonLd(postJsonLd(post)),
+        jsonLd(postJsonLd(post, settings)),
         jsonLd(
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },

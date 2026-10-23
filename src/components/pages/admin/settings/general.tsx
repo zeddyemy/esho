@@ -135,14 +135,36 @@ export default function GeneralSettings() {
         <form.AppField name="footerNote">{(f) => <f.TextField label="Footer note" maxLength={160} hint="Optional" />}</form.AppField>
       </FormSection>
 
-      <FormSection title="Search and sharing" description="How the homepage looks in Google and in link previews on WhatsApp, LinkedIn and X.">
+      <FormSection title="Search and sharing" description="How the homepage appears in Google and in link previews on WhatsApp, LinkedIn and X, plus search engine ownership codes.">
         <form.AppField name="seo.title">
           {(f) => <f.TextField label="Page title" maxLength={70} description="Leave empty to use your brand and name." />}
         </form.AppField>
         <form.AppField name="seo.description">{(f) => <f.TextareaField label="Description" rows={3} maxLength={170} />}</form.AppField>
         <form.AppField name="seo.image">
-          {(f) => <f.ImageField label="Sharing image" folder="site" aspect="landscape" description="Optional. Your portrait is used when empty." />}
+          {(f) => (
+            <f.ImageField
+              label="Sharing image"
+              folder="site"
+              aspect="landscape"
+              description="Optional. When empty, a branded card with your headline is generated automatically."
+            />
+          )}
         </form.AppField>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <form.AppField name="seo.googleVerification">
+            {(f) => (
+              <f.TextField
+                label="Google Search Console code"
+                maxLength={120}
+                hint="Optional"
+                description='From the "HTML tag" method: paste only the content="..." value.'
+              />
+            )}
+          </form.AppField>
+          <form.AppField name="seo.bingVerification">
+            {(f) => <f.TextField label="Bing Webmaster code" maxLength={120} hint="Optional" description="Same idea: only the content value." />}
+          </form.AppField>
+        </div>
       </FormSection>
 
       <form.AppForm>

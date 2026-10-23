@@ -18,7 +18,7 @@ export default function Experience({ items }: { items: Array<ExperienceItem> }) 
             <h2 className="font-display text-4xl tracking-[-0.025em] md:text-5xl">Experience</h2>
             <Link to="/about" hash="experience" className="link-underline group mt-6 inline-flex items-center gap-1.5 text-sm">
               Full background
-              <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="size-4" />
             </Link>
           </div>
         </div>

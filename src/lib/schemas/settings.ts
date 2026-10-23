@@ -33,6 +33,8 @@ export const settingsSchema = z.object({
     title: optionalText(70),
     description: optionalText(170),
     image: imageAssetSchema.nullable(),
+    googleVerification: optionalText(120),
+    bingVerification: optionalText(120),
   }),
 })
 

@@ -26,8 +26,10 @@ export function Reveal({ delay = 0, y = 28, className, style, children, ...props
 }
 
 /**
- * Splits a line of display text into words that rise in sequence. Pure CSS so
- * headlines animate from first paint without waiting for JavaScript.
+ * Splits a line of display text into words that can rise in sequence. The
+ * animation only runs at the "full" motion level (see `.word-rise` in
+ * styles.css); otherwise the words are plain text. Pure CSS, so headlines
+ * render from first paint without waiting for JavaScript.
  */
 export function RevealWords({
   text,
@@ -45,10 +47,7 @@ export function RevealWords({
     <span className={className}>
       {words.map((word, i) => (
         <span key={`${word}-${i}`} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
-          <span
-            className="inline-block"
-            style={{ animation: `word-rise 1s var(--ease-out-expo) ${delay + i * stagger}s both` }}
-          >
+          <span className="word-rise inline-block" style={{ '--word-delay': `${delay + i * stagger}s` } as React.CSSProperties}>
             {word}
             {i < words.length - 1 ? '\u00a0' : ''}
           </span>

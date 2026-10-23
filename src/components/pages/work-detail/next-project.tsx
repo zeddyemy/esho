@@ -12,7 +12,7 @@ export default function NextProject({ project }: { project: ProjectSummary }) {
           <p className="text-sm text-mute">Next project</p>
           <h2 className="mt-3 flex items-center gap-4 font-display text-5xl leading-none tracking-[-0.035em] transition-colors group-hover:text-cobalt md:text-7xl">
             {project.title}
-            <ArrowRight className="size-8 shrink-0 transition-transform duration-500 ease-out-expo group-hover:translate-x-2 md:size-12" strokeWidth={1.25} />
+            <ArrowRight className="size-8 shrink-0 md:size-12" strokeWidth={1.25} />
           </h2>
           <p className="mt-4 max-w-lg text-mute">{project.summary}</p>
         </div>

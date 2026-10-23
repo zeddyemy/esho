@@ -3,6 +3,7 @@
  * per-section fallback if a row is missing. Everything here is editable in
  * the admin; facts marked "placeholder" in brain.md must be confirmed.
  */
+import { DEFAULT_APPEARANCE } from '@/lib/appearance'
 import { img } from '@/lib/seed/images'
 import type {
   AboutContent,
@@ -35,11 +36,14 @@ export const seedSettings: SiteSettings = {
   showWriting: true,
   showTestimonials: true,
   showResume: true,
+  appearance: DEFAULT_APPEARANCE,
   seo: {
-    title: 'Esho | Emmanuel Olowu, full-stack product engineer',
+    title: 'Emmanuel Olowu | Senior Full-Stack Product Engineer, Lagos',
     description:
       'Emmanuel Olowu is a senior full-stack product engineer in Lagos, designing, building and shipping web products, data systems and AI-assisted tools.',
     image: null,
+    googleVerification: '',
+    bingVerification: '',
   },
 }
 

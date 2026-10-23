@@ -17,7 +17,7 @@ export default function PostPage({ slug }: { slug: string }) {
     <article>
       <header className="container-site pt-10 md:pt-14">
         <Link to="/writing" className="group inline-flex items-center gap-2 text-sm text-mute transition-colors hover:text-ink">
-          <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
+          <ArrowLeft className="size-4" />
           Writing
         </Link>
         <div className="mx-auto mt-10 max-w-3xl md:mt-14">

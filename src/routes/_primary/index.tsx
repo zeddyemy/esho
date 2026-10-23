@@ -13,7 +13,7 @@ import { jsonLd, personJsonLd, seo } from '@/lib/seo'
 
 export const Route = createFileRoute('/_primary/')({
   loader: async ({ context: { queryClient } }) => {
-    const [settings, , , , , , stack] = await Promise.all([
+    const [settings, , , experiences, , , stack] = await Promise.all([
       queryClient.ensureQueryData(settingsQuery()),
       queryClient.ensureQueryData(homeContentQuery()),
       queryClient.ensureQueryData(projectsQuery()),
@@ -22,14 +22,18 @@ export const Route = createFileRoute('/_primary/')({
       queryClient.ensureQueryData(postsQuery({ limit: 3 })),
       queryClient.ensureQueryData(stackGroupsQuery()),
     ])
-    return { settings, skills: stack.flatMap((g) => g.items).slice(0, 30) }
+    return {
+      settings,
+      skills: stack.flatMap((g) => g.items).slice(0, 30),
+      education: experiences.filter((e) => e.kind === 'education'),
+    }
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {}
-    const { settings, skills } = loaderData
+    const { settings, skills, education } = loaderData
     return {
-      ...seo({ settings, path: '/', type: 'profile' }),
-      scripts: [jsonLd(personJsonLd(settings, skills))],
+      ...seo({ settings, path: '/', type: 'profile', image: settings.seo.image, ogPath: '/og' }),
+      scripts: [jsonLd(personJsonLd(settings, { skills, education }))],
     }
   },
   component: Home,

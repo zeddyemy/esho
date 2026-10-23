@@ -34,13 +34,13 @@ export default function Hero({ content, settings }: { content: HeroContent; sett
               <Button asChild size="lg" className="group bg-cobalt-ink text-cobalt hover:bg-paper hover:text-ink">
                 <Link to="/contact">
                   {content.primaryCta}
-                  <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="group border-cobalt-ink/40 text-cobalt-ink hover:border-cobalt-ink hover:bg-cobalt-ink/5">
                 <a href="#work">
                   {content.secondaryCta}
-                  <ArrowDownRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                  <ArrowDownRight />
                 </a>
               </Button>
             </div>

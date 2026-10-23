@@ -1,3 +1,5 @@
+import type { Appearance } from '@/lib/appearance'
+
 /**
  * Domain types. These mirror the Supabase tables in `supabase/migrations`
  * (snake_case columns are mapped to camelCase in `server/mappers.ts`) so seed
@@ -56,10 +58,14 @@ export interface SiteSettings {
   showWriting: boolean
   showTestimonials: boolean
   showResume: boolean
+  appearance: Appearance
   seo: {
     title: string
     description: string
     image: ImageAsset | null
+    /** Search Console / Bing Webmaster ownership codes (content="..." values). */
+    googleVerification: string
+    bingVerification: string
   }
 }
 
@@ -94,6 +100,7 @@ export interface Project {
   featured: boolean
   published: boolean
   sortOrder: number
+  updatedAt: string
 }
 
 /** List item without the heavy fields. */
@@ -112,6 +119,7 @@ export interface Post {
   tags: Array<string>
   published: boolean
   publishedAt: string | null
+  updatedAt: string
   readingMinutes: number
 }
 
