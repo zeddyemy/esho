@@ -29,6 +29,7 @@ import { Route as PrimaryWorkSlugRouteImport } from './routes/_primary/work.$slu
 import { Route as PrimaryWritingIndexRouteImport } from './routes/_primary/writing.index'
 import { Route as PrimaryWritingSlugRouteImport } from './routes/_primary/writing.$slug'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin/_dashboard/index'
+import { Route as AdminDashboardAppearanceRouteImport } from './routes/admin/_dashboard/appearance'
 import { Route as AdminDashboardContentRouteImport } from './routes/admin/_dashboard/content'
 import { Route as AdminDashboardExperienceRouteImport } from './routes/admin/_dashboard/experience'
 import { Route as AdminDashboardInquiriesRouteImport } from './routes/admin/_dashboard/inquiries'
@@ -139,6 +140,12 @@ const AdminDashboardIndexRoute = AdminDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
+const AdminDashboardAppearanceRoute =
+  AdminDashboardAppearanceRouteImport.update({
+    id: '/appearance',
+    path: '/appearance',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
 const AdminDashboardContentRoute = AdminDashboardContentRouteImport.update({
   id: '/content',
   path: '/content',
@@ -213,6 +220,7 @@ export interface FileRoutesByFullPath {
   '/api/keep-alive': typeof ApiKeepAliveRoute
   '/work/$slug': typeof PrimaryWorkSlugRoute
   '/writing/$slug': typeof PrimaryWritingSlugRoute
+  '/admin/appearance': typeof AdminDashboardAppearanceRoute
   '/admin/content': typeof AdminDashboardContentRoute
   '/admin/experience': typeof AdminDashboardExperienceRoute
   '/admin/inquiries': typeof AdminDashboardInquiriesRoute
@@ -243,6 +251,7 @@ export interface FileRoutesByTo {
   '/': typeof PrimaryIndexRoute
   '/work/$slug': typeof PrimaryWorkSlugRoute
   '/writing/$slug': typeof PrimaryWritingSlugRoute
+  '/admin/appearance': typeof AdminDashboardAppearanceRoute
   '/admin/content': typeof AdminDashboardContentRoute
   '/admin/experience': typeof AdminDashboardExperienceRoute
   '/admin/inquiries': typeof AdminDashboardInquiriesRoute
@@ -276,6 +285,7 @@ export interface FileRoutesById {
   '/_primary/': typeof PrimaryIndexRoute
   '/_primary/work/$slug': typeof PrimaryWorkSlugRoute
   '/_primary/writing/$slug': typeof PrimaryWritingSlugRoute
+  '/admin/_dashboard/appearance': typeof AdminDashboardAppearanceRoute
   '/admin/_dashboard/content': typeof AdminDashboardContentRoute
   '/admin/_dashboard/experience': typeof AdminDashboardExperienceRoute
   '/admin/_dashboard/inquiries': typeof AdminDashboardInquiriesRoute
@@ -309,6 +319,7 @@ export interface FileRouteTypes {
     | '/api/keep-alive'
     | '/work/$slug'
     | '/writing/$slug'
+    | '/admin/appearance'
     | '/admin/content'
     | '/admin/experience'
     | '/admin/inquiries'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/'
     | '/work/$slug'
     | '/writing/$slug'
+    | '/admin/appearance'
     | '/admin/content'
     | '/admin/experience'
     | '/admin/inquiries'
@@ -371,6 +383,7 @@ export interface FileRouteTypes {
     | '/_primary/'
     | '/_primary/work/$slug'
     | '/_primary/writing/$slug'
+    | '/admin/_dashboard/appearance'
     | '/admin/_dashboard/content'
     | '/admin/_dashboard/experience'
     | '/admin/_dashboard/inquiries'
@@ -543,6 +556,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardIndexRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
+    '/admin/_dashboard/appearance': {
+      id: '/admin/_dashboard/appearance'
+      path: '/appearance'
+      fullPath: '/admin/appearance'
+      preLoaderRoute: typeof AdminDashboardAppearanceRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
     '/admin/_dashboard/content': {
       id: '/admin/_dashboard/content'
       path: '/content'
@@ -640,6 +660,7 @@ const PrimaryRouteWithChildren =
   PrimaryRoute._addFileChildren(PrimaryRouteChildren)
 
 interface AdminDashboardRouteChildren {
+  AdminDashboardAppearanceRoute: typeof AdminDashboardAppearanceRoute
   AdminDashboardContentRoute: typeof AdminDashboardContentRoute
   AdminDashboardExperienceRoute: typeof AdminDashboardExperienceRoute
   AdminDashboardInquiriesRoute: typeof AdminDashboardInquiriesRoute
@@ -654,6 +675,7 @@ interface AdminDashboardRouteChildren {
 }
 
 const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
+  AdminDashboardAppearanceRoute: AdminDashboardAppearanceRoute,
   AdminDashboardContentRoute: AdminDashboardContentRoute,
   AdminDashboardExperienceRoute: AdminDashboardExperienceRoute,
   AdminDashboardInquiriesRoute: AdminDashboardInquiriesRoute,

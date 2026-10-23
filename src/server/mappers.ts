@@ -1,4 +1,5 @@
 /** Maps snake_case database rows to the app's camelCase domain types. */
+import { normalizeAppearance } from '@/lib/appearance'
 import { EXPERIENCE_KINDS } from '@/types'
 import type { Tables } from '@/types/database'
 import type {
@@ -52,6 +53,7 @@ export function toSettings(row: Tables<'site_settings'>): SiteSettings {
     showWriting: row.show_writing,
     showTestimonials: row.show_testimonials,
     showResume: row.show_resume,
+    appearance: normalizeAppearance(row.appearance),
     seo: {
       title: seo.title || `${row.brand_name} | ${row.owner_name}`,
       description: seo.description ?? '',

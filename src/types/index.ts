@@ -1,3 +1,5 @@
+import type { Appearance } from '@/lib/appearance'
+
 /**
  * Domain types. These mirror the Supabase tables in `supabase/migrations`
  * (snake_case columns are mapped to camelCase in `server/mappers.ts`) so seed
@@ -56,6 +58,7 @@ export interface SiteSettings {
   showWriting: boolean
   showTestimonials: boolean
   showResume: boolean
+  appearance: Appearance
   seo: {
     title: string
     description: string

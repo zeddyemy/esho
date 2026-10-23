@@ -3,6 +3,7 @@
  * per-section fallback if a row is missing. Everything here is editable in
  * the admin; facts marked "placeholder" in brain.md must be confirmed.
  */
+import { DEFAULT_APPEARANCE } from '@/lib/appearance'
 import { img } from '@/lib/seed/images'
 import type {
   AboutContent,
@@ -35,6 +36,7 @@ export const seedSettings: SiteSettings = {
   showWriting: true,
   showTestimonials: true,
   showResume: true,
+  appearance: DEFAULT_APPEARANCE,
   seo: {
     title: 'Esho | Emmanuel Olowu, full-stack product engineer',
     description:

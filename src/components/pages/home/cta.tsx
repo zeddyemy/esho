@@ -21,7 +21,7 @@ export default function Cta({ content, email }: { content: CtaContent; email: st
             <Button asChild size="lg" variant="accent" className="group">
               <Link to="/contact">
                 {CONTACT_CTA}
-                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight />
               </Link>
             </Button>
             <a href={`mailto:${email}`} className="link-static text-ink">

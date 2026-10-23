@@ -67,7 +67,7 @@ export function CapabilitiesSection({ value }: { value: CapabilitiesContent }) {
   return (
     <SectionCard
       title="Capabilities"
-      description="The grid of what you do. A capability without a photo becomes a dark highlight block."
+      description="The numbered list of what you do, two per row on wide screens."
       onSubmit={() => void form.handleSubmit()}
       footer={
         <form.AppForm>
@@ -82,14 +82,9 @@ export function CapabilitiesSection({ value }: { value: CapabilitiesContent }) {
           <div className="grid gap-4">
             {items.state.value.map((_, i) => (
               <ItemFrame key={i} legend={`Capability ${i + 1}`} onRemove={items.state.value.length > 1 ? () => items.removeValue(i) : undefined}>
-                <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_14rem]">
-                  <div className="grid content-start gap-4">
-                    <form.AppField name={`items[${i}].title`}>{(f) => <f.TextField label="Title" maxLength={40} />}</form.AppField>
-                    <form.AppField name={`items[${i}].body`}>{(f) => <f.TextareaField label="Text" rows={3} maxLength={200} />}</form.AppField>
-                    <form.AppField name={`items[${i}].points`}>{(f) => <f.TagsField label="Key points" max={5} />}</form.AppField>
-                  </div>
-                  <form.AppField name={`items[${i}].image`}>{(f) => <f.ImageField label="Photo" folder="site/home" aspect="landscape" />}</form.AppField>
-                </div>
+                <form.AppField name={`items[${i}].title`}>{(f) => <f.TextField label="Title" maxLength={40} />}</form.AppField>
+                <form.AppField name={`items[${i}].body`}>{(f) => <f.TextareaField label="Text" rows={3} maxLength={200} />}</form.AppField>
+                <form.AppField name={`items[${i}].points`}>{(f) => <f.TagsField label="Key points" max={5} />}</form.AppField>
               </ItemFrame>
             ))}
             {items.state.value.length < 6 ? (

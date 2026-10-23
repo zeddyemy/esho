@@ -7,6 +7,7 @@ import {
   Layers,
   LayoutDashboard,
   MessageSquareQuote,
+  Palette,
   Settings,
 } from 'lucide-react'
 import type { LinkProps } from '@tanstack/react-router'
@@ -48,6 +49,7 @@ export const adminNav: Array<AdminNavGroup> = [
     label: 'Website',
     items: [
       { label: 'Page content', to: '/admin/content', icon: FileText },
+      { label: 'Appearance', to: '/admin/appearance', icon: Palette },
       { label: 'Settings', to: '/admin/settings', icon: Settings },
     ],
   },

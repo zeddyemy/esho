@@ -17,7 +17,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
     <header>
       <div className="container-site pt-10 md:pt-14">
         <Link to="/work" className="group inline-flex items-center gap-2 text-sm text-mute transition-colors hover:text-ink">
-          <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-0.5" />
+          <ArrowLeft className="size-4" />
           All work
         </Link>
 
@@ -46,7 +46,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
               <li key={link.url}>
                 <a href={link.url} target="_blank" rel="noreferrer" className="link-underline group inline-flex items-center gap-1">
                   {link.label}
-                  <ArrowUpRight className="size-4 text-mute transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight className="size-4 text-mute" />
                 </a>
               </li>
             ))}

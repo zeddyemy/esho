@@ -26,7 +26,7 @@ export default function ResumeCta({ settings }: { settings: SiteSettings }) {
           <Button asChild size="lg" className="group">
             <Link to="/contact">
               {CONTACT_CTA}
-              <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight />
             </Link>
           </Button>
         </div>

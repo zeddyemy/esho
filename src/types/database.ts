@@ -257,6 +257,7 @@ export type Database = {
       }
       site_settings: {
         Row: {
+          appearance: Json
           availability: string
           brand_name: string
           email: string
@@ -280,6 +281,7 @@ export type Database = {
           whatsapp: string
         }
         Insert: {
+          appearance?: Json
           availability?: string
           brand_name: string
           email?: string
@@ -303,6 +305,7 @@ export type Database = {
           whatsapp?: string
         }
         Update: {
+          appearance?: Json
           availability?: string
           brand_name?: string
           email?: string

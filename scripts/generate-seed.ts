@@ -42,7 +42,7 @@ const out: Array<string> = [
 
 const s = seedSettings
 out.push(
-  `insert into public.site_settings (id, brand_name, owner_name, role_title, tagline, logo, portrait, availability, open_to_work, email, phones, whatsapp, location, socials, resume, footer_note, show_writing, show_testimonials, show_resume, seo) values (1, ${q(s.brandName)}, ${q(s.ownerName)}, ${q(s.roleTitle)}, ${q(s.tagline)}, ${j(s.logo)}, ${j(s.portrait)}, ${q(s.availability)}, ${bool(s.openToWork)}, ${q(s.email)}, ${arr(s.phones)}, ${q(s.whatsapp)}, ${q(s.location)}, ${j(s.socials)}, ${j(s.resume)}, ${q(s.footerNote)}, ${bool(s.showWriting)}, ${bool(s.showTestimonials)}, ${bool(s.showResume)}, ${j(s.seo)});`,
+  `insert into public.site_settings (id, brand_name, owner_name, role_title, tagline, logo, portrait, availability, open_to_work, email, phones, whatsapp, location, socials, resume, footer_note, show_writing, show_testimonials, show_resume, appearance, seo) values (1, ${q(s.brandName)}, ${q(s.ownerName)}, ${q(s.roleTitle)}, ${q(s.tagline)}, ${j(s.logo)}, ${j(s.portrait)}, ${q(s.availability)}, ${bool(s.openToWork)}, ${q(s.email)}, ${arr(s.phones)}, ${q(s.whatsapp)}, ${q(s.location)}, ${j(s.socials)}, ${j(s.resume)}, ${q(s.footerNote)}, ${bool(s.showWriting)}, ${bool(s.showTestimonials)}, ${bool(s.showResume)}, ${j(s.appearance)}, ${j(s.seo)});`,
   '',
 )
 

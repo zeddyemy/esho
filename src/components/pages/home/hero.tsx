@@ -41,13 +41,13 @@ export default function Hero({ content, settings }: { content: HeroContent; sett
           <Button asChild size="lg" className="group">
             <Link to="/contact">
               {content.primaryCta}
-              <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="group">
             <a href="#work">
               {content.secondaryCta}
-              <ArrowDownRight className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              <ArrowDownRight />
             </a>
           </Button>
         </div>
