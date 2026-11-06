@@ -35,6 +35,7 @@ import { Route as AdminDashboardAppearanceRouteImport } from './routes/admin/_da
 import { Route as AdminDashboardContentRouteImport } from './routes/admin/_dashboard/content'
 import { Route as AdminDashboardExperienceRouteImport } from './routes/admin/_dashboard/experience'
 import { Route as AdminDashboardInquiriesRouteImport } from './routes/admin/_dashboard/inquiries'
+import { Route as AdminDashboardSectionsRouteImport } from './routes/admin/_dashboard/sections'
 import { Route as AdminDashboardSettingsRouteImport } from './routes/admin/_dashboard/settings'
 import { Route as AdminDashboardStackRouteImport } from './routes/admin/_dashboard/stack'
 import { Route as AdminDashboardTestimonialsRouteImport } from './routes/admin/_dashboard/testimonials'
@@ -174,6 +175,11 @@ const AdminDashboardInquiriesRoute = AdminDashboardInquiriesRouteImport.update({
   path: '/inquiries',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
+const AdminDashboardSectionsRoute = AdminDashboardSectionsRouteImport.update({
+  id: '/sections',
+  path: '/sections',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
 const AdminDashboardSettingsRoute = AdminDashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -238,6 +244,7 @@ export interface FileRoutesByFullPath {
   '/admin/content': typeof AdminDashboardContentRoute
   '/admin/experience': typeof AdminDashboardExperienceRoute
   '/admin/inquiries': typeof AdminDashboardInquiriesRoute
+  '/admin/sections': typeof AdminDashboardSectionsRoute
   '/admin/settings': typeof AdminDashboardSettingsRoute
   '/admin/stack': typeof AdminDashboardStackRoute
   '/admin/testimonials': typeof AdminDashboardTestimonialsRoute
@@ -271,6 +278,7 @@ export interface FileRoutesByTo {
   '/admin/content': typeof AdminDashboardContentRoute
   '/admin/experience': typeof AdminDashboardExperienceRoute
   '/admin/inquiries': typeof AdminDashboardInquiriesRoute
+  '/admin/sections': typeof AdminDashboardSectionsRoute
   '/admin/settings': typeof AdminDashboardSettingsRoute
   '/admin/stack': typeof AdminDashboardStackRoute
   '/admin/testimonials': typeof AdminDashboardTestimonialsRoute
@@ -307,6 +315,7 @@ export interface FileRoutesById {
   '/admin/_dashboard/content': typeof AdminDashboardContentRoute
   '/admin/_dashboard/experience': typeof AdminDashboardExperienceRoute
   '/admin/_dashboard/inquiries': typeof AdminDashboardInquiriesRoute
+  '/admin/_dashboard/sections': typeof AdminDashboardSectionsRoute
   '/admin/_dashboard/settings': typeof AdminDashboardSettingsRoute
   '/admin/_dashboard/stack': typeof AdminDashboardStackRoute
   '/admin/_dashboard/testimonials': typeof AdminDashboardTestimonialsRoute
@@ -343,6 +352,7 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/admin/experience'
     | '/admin/inquiries'
+    | '/admin/sections'
     | '/admin/settings'
     | '/admin/stack'
     | '/admin/testimonials'
@@ -376,6 +386,7 @@ export interface FileRouteTypes {
     | '/admin/content'
     | '/admin/experience'
     | '/admin/inquiries'
+    | '/admin/sections'
     | '/admin/settings'
     | '/admin/stack'
     | '/admin/testimonials'
@@ -411,6 +422,7 @@ export interface FileRouteTypes {
     | '/admin/_dashboard/content'
     | '/admin/_dashboard/experience'
     | '/admin/_dashboard/inquiries'
+    | '/admin/_dashboard/sections'
     | '/admin/_dashboard/settings'
     | '/admin/_dashboard/stack'
     | '/admin/_dashboard/testimonials'
@@ -624,6 +636,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardInquiriesRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
+    '/admin/_dashboard/sections': {
+      id: '/admin/_dashboard/sections'
+      path: '/sections'
+      fullPath: '/admin/sections'
+      preLoaderRoute: typeof AdminDashboardSectionsRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
     '/admin/_dashboard/settings': {
       id: '/admin/_dashboard/settings'
       path: '/settings'
@@ -704,6 +723,7 @@ interface AdminDashboardRouteChildren {
   AdminDashboardContentRoute: typeof AdminDashboardContentRoute
   AdminDashboardExperienceRoute: typeof AdminDashboardExperienceRoute
   AdminDashboardInquiriesRoute: typeof AdminDashboardInquiriesRoute
+  AdminDashboardSectionsRoute: typeof AdminDashboardSectionsRoute
   AdminDashboardSettingsRoute: typeof AdminDashboardSettingsRoute
   AdminDashboardStackRoute: typeof AdminDashboardStackRoute
   AdminDashboardTestimonialsRoute: typeof AdminDashboardTestimonialsRoute
@@ -719,6 +739,7 @@ const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
   AdminDashboardContentRoute: AdminDashboardContentRoute,
   AdminDashboardExperienceRoute: AdminDashboardExperienceRoute,
   AdminDashboardInquiriesRoute: AdminDashboardInquiriesRoute,
+  AdminDashboardSectionsRoute: AdminDashboardSectionsRoute,
   AdminDashboardSettingsRoute: AdminDashboardSettingsRoute,
   AdminDashboardStackRoute: AdminDashboardStackRoute,
   AdminDashboardTestimonialsRoute: AdminDashboardTestimonialsRoute,

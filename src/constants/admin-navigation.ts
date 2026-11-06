@@ -5,6 +5,7 @@ import {
   FolderKanban,
   Inbox,
   Layers,
+  LayoutList,
   LayoutDashboard,
   MessageSquareQuote,
   Palette,
@@ -49,6 +50,7 @@ export const adminNav: Array<AdminNavGroup> = [
     label: 'Website',
     items: [
       { label: 'Page content', to: '/admin/content', icon: FileText },
+      { label: 'Sections', to: '/admin/sections', icon: LayoutList },
       { label: 'Appearance', to: '/admin/appearance', icon: Palette },
       { label: 'Settings', to: '/admin/settings', icon: Settings },
     ],

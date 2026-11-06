@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import About from '@/components/pages/about'
 import { aboutContentQuery, experiencesQuery, settingsQuery, stackGroupsQuery } from '@/hooks/api/site'
+import { isSectionVisible } from '@/lib/sections'
 import { breadcrumbJsonLd, jsonLd, profilePageJsonLd, seo } from '@/lib/seo'
 
 export const Route = createFileRoute('/_primary/about')({
@@ -15,8 +16,8 @@ export const Route = createFileRoute('/_primary/about')({
     return {
       settings,
       about,
-      skills: stack.flatMap((g) => g.items).slice(0, 30),
-      education: experiences.filter((e) => e.kind === 'education'),
+      skills: isSectionVisible(settings, 'about.stack') ? stack.flatMap((g) => g.items).slice(0, 30) : [],
+      education: isSectionVisible(settings, 'about.education') ? experiences.filter((e) => e.kind === 'education') : [],
     }
   },
   head: ({ loaderData }) => {

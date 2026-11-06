@@ -60,6 +60,7 @@ export function toSettings(row: Tables<'site_settings'>): SiteSettings {
     showTestimonials: row.show_testimonials,
     showResume: row.show_resume,
     appearance: normalizeAppearance(row.appearance),
+    hiddenSections: [],
     seo: {
       title: seo.title || `${row.owner_name} | ${row.role_title}`,
       description: seo.description ?? '',

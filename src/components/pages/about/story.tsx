@@ -1,19 +1,24 @@
 import { Reveal } from '@/components/ui/custom/reveal'
+import { cn } from '@/lib/utils'
 import type { AboutContent } from '@/types'
 
 /** Story (markdown) followed by numbered working principles in a 2x2 grid. */
-export default function Story({ storyHtml, principles }: { storyHtml: string; principles: AboutContent['principles'] }) {
+export default function Story({ storyHtml, principles }: { storyHtml: string | null; principles: AboutContent['principles'] }) {
+  if (!storyHtml && principles.length === 0) return null
+
   return (
     <section className="border-t border-line py-20 md:py-28">
-      <div className="container-site grid gap-12 md:grid-cols-12">
-        <h2 className="font-display text-3xl tracking-[-0.02em] md:col-span-4 md:text-4xl">The longer version</h2>
-        <Reveal className="min-w-0 md:col-span-7 md:col-start-6">
-          <div className="prose-editorial text-lg" dangerouslySetInnerHTML={{ __html: storyHtml }} />
-        </Reveal>
-      </div>
+      {storyHtml ? (
+        <div className="container-site grid gap-12 md:grid-cols-12">
+          <h2 className="font-display text-3xl tracking-[-0.02em] md:col-span-4 md:text-4xl">The longer version</h2>
+          <Reveal className="min-w-0 md:col-span-7 md:col-start-6">
+            <div className="prose-editorial text-lg" dangerouslySetInnerHTML={{ __html: storyHtml }} />
+          </Reveal>
+        </div>
+      ) : null}
 
       {principles.length ? (
-        <div className="container-site mt-20 md:mt-28">
+        <div className={cn('container-site', storyHtml && 'mt-20 md:mt-28')}>
           <h2 className="font-display text-3xl tracking-[-0.02em] md:text-4xl">How I work</h2>
           <ol className="mt-10 grid gap-px bg-line sm:grid-cols-2">
             {principles.map((p, i) => (
