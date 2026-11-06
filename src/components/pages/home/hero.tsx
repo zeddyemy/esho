@@ -10,7 +10,16 @@ import type { HeroContent, SiteSettings } from '@/types'
  * Asymmetric split hero: statement and actions on the left, portrait on the
  * right. Entrance motion is CSS-only so it plays from first paint.
  */
-export default function Hero({ content, settings }: { content: HeroContent; settings: SiteSettings }) {
+export default function Hero({
+  content,
+  settings,
+  workHref,
+}: {
+  content: HeroContent
+  settings: SiteSettings
+  /** `#work` when Selected work is on this page, otherwise the Work page. */
+  workHref: string
+}) {
   return (
     <section className="container-site grid gap-10 pt-10 pb-16 md:pt-16 lg:grid-cols-12 lg:gap-12 lg:pt-20 lg:pb-24">
       <div className="flex flex-col justify-end lg:col-span-8">
@@ -45,7 +54,7 @@ export default function Hero({ content, settings }: { content: HeroContent; sett
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="group">
-            <a href="#work">
+            <a href={workHref}>
               {content.secondaryCta}
               <ArrowDownRight />
             </a>

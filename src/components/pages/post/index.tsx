@@ -7,6 +7,7 @@ import { RevealWords } from '@/components/ui/custom/reveal'
 import { postQuery } from '@/hooks/api/content'
 import { settingsQuery } from '@/hooks/api/site'
 import { formatDate } from '@/lib/format'
+import { isSectionVisible } from '@/lib/sections'
 
 export default function PostPage({ slug }: { slug: string }) {
   const { data } = useSuspenseQuery(postQuery(slug))
@@ -49,7 +50,7 @@ export default function PostPage({ slug }: { slug: string }) {
         <div className="prose-editorial mx-auto max-w-[68ch]" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
       </div>
 
-      {more.length ? (
+      {more.length && isSectionVisible(settings, 'post.more') ? (
         <aside className="border-t border-line py-16 md:py-24">
           <div className="container-site">
             <h2 className="font-display text-3xl tracking-[-0.02em] md:text-4xl">Keep reading</h2>

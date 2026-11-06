@@ -6,7 +6,7 @@ import { formatYearRange } from '@/lib/format'
 import type { Experience as ExperienceItem } from '@/types'
 
 /** Sticky heading on the left, recent roles on the right. Full history lives on /about. */
-export default function Experience({ items }: { items: Array<ExperienceItem> }) {
+export default function Experience({ items, linkHash }: { items: Array<ExperienceItem>; linkHash?: string }) {
   const roles = items.filter((e) => e.kind === 'work').slice(0, 3)
   if (roles.length === 0) return null
 
@@ -16,7 +16,7 @@ export default function Experience({ items }: { items: Array<ExperienceItem> }) 
         <div className="md:col-span-4">
           <div className="md:sticky md:top-28">
             <h2 className="font-display text-4xl tracking-[-0.025em] md:text-5xl">Experience</h2>
-            <Link to="/about" hash="experience" className="link-underline group mt-6 inline-flex items-center gap-1.5 text-sm">
+            <Link to="/about" hash={linkHash} className="link-underline group mt-6 inline-flex items-center gap-1.5 text-sm">
               Full background
               <ArrowUpRight className="size-4" />
             </Link>

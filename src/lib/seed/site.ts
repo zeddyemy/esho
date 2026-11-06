@@ -37,6 +37,7 @@ export const seedSettings: SiteSettings = {
   showTestimonials: true,
   showResume: true,
   appearance: DEFAULT_APPEARANCE,
+  hiddenSections: [],
   seo: {
     title: 'Emmanuel Olowu | Senior Full-Stack Product Engineer, Lagos',
     description:

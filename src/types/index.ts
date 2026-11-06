@@ -1,4 +1,5 @@
 import type { Appearance } from '@/lib/appearance'
+import type { HideableSectionKey } from '@/lib/sections'
 
 /**
  * Domain types. These mirror the Supabase tables in `supabase/migrations`
@@ -59,6 +60,8 @@ export interface SiteSettings {
   showTestimonials: boolean
   showResume: boolean
   appearance: Appearance
+  /** Sections switched off in the admin (see lib/sections.ts). */
+  hiddenSections: Array<HideableSectionKey>
   seo: {
     title: string
     description: string

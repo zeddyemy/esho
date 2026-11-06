@@ -9,6 +9,7 @@ import {
   stackGroupsQuery,
   testimonialsQuery,
 } from '@/hooks/api/site'
+import { isSectionVisible } from '@/lib/sections'
 import { jsonLd, personJsonLd, seo } from '@/lib/seo'
 
 export const Route = createFileRoute('/_primary/')({
@@ -24,8 +25,8 @@ export const Route = createFileRoute('/_primary/')({
     ])
     return {
       settings,
-      skills: stack.flatMap((g) => g.items).slice(0, 30),
-      education: experiences.filter((e) => e.kind === 'education'),
+      skills: isSectionVisible(settings, 'about.stack') ? stack.flatMap((g) => g.items).slice(0, 30) : [],
+      education: isSectionVisible(settings, 'about.education') ? experiences.filter((e) => e.kind === 'education') : [],
     }
   },
   head: ({ loaderData }) => {

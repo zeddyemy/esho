@@ -26,6 +26,7 @@ import {
   toStackGroup,
   toTestimonial,
 } from '@/server/mappers'
+import { normalizeHiddenSections } from '@/lib/sections'
 import { renderMarkdown } from '@/server/markdown'
 import { getPublicClient } from '@/server/supabase'
 import type {
@@ -53,9 +54,14 @@ const POST_LIST_COLUMNS =
   'id, slug, title, excerpt, cover, tags, reading_minutes, published, published_at, created_at, updated_at'
 
 export async function findSettings(): Promise<SiteSettings> {
-  const { data, error } = await getPublicClient().from('site_settings').select('*').eq('id', 1).maybeSingle()
+  const db = getPublicClient()
+  const [{ data, error }, visibility] = await Promise.all([
+    db.from('site_settings').select('*').eq('id', 1).maybeSingle(),
+    db.from('page_content').select('data').eq('page', 'site').eq('section', 'visibility').maybeSingle(),
+  ])
   if (error) fail('settings', error)
-  return data ? toSettings(data) : seedSettings
+  if (visibility.error) fail('settings:visibility', visibility.error)
+  return { ...(data ? toSettings(data) : seedSettings), hiddenSections: normalizeHiddenSections(visibility.data?.data) }
 }
 
 /** Loads all sections of a page as a { section: data } map. */

@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { SITE_URL } from '@/lib/seo'
+import { isSectionVisible } from '@/lib/sections'
 import { SOCIAL_LABELS } from '@/constants/socials'
 import { findExperiences, findPosts, findProjects, findSettings, findStackGroups } from '@/server/repository'
 
@@ -19,8 +20,10 @@ export const Route = createFileRoute('/llms.txt')({
           findStackGroups(),
         ])
         const posts = settings.showWriting ? await findPosts({ limit: 50 }) : []
-        const roles = experiences.filter((e) => e.kind === 'work')
-        const education = experiences.filter((e) => e.kind === 'education')
+        const showRoles = isSectionVisible(settings, 'home.experience') || isSectionVisible(settings, 'about.experience')
+        const roles = showRoles ? experiences.filter((e) => e.kind === 'work') : []
+        const education = isSectionVisible(settings, 'about.education') ? experiences.filter((e) => e.kind === 'education') : []
+        const skills = isSectionVisible(settings, 'about.stack') ? stack : []
         const socials = Object.entries(settings.socials).filter(([, url]) => url)
 
         const lines = [
@@ -42,16 +45,17 @@ export const Route = createFileRoute('/llms.txt')({
           '',
           ...projects.map((p) => `- [${p.title}](${SITE_URL}/work/${p.slug}): ${p.summary} (${p.year}; ${p.stack.join(', ')})`),
           '',
-          '## Experience',
-          '',
-          ...roles.map((r) => `- ${r.title}, ${r.organisation} (${r.startDate.slice(0, 4)} to ${r.endDate ? r.endDate.slice(0, 4) : 'present'}): ${r.summary}`),
-          ...(education.length ? ['', '## Education', '', ...education.map((e) => `- ${e.title}, ${e.organisation}`)] : []),
-          '',
-          '## Skills',
-          '',
-          ...stack.map((g) => `- ${g.title}: ${g.items.join(', ')}`),
-          ...(posts.length ? ['', '## Writing', '', ...posts.map((p) => `- [${p.title}](${SITE_URL}/writing/${p.slug}): ${p.excerpt}`)] : []),
-          '',
+          ...(roles.length
+            ? [
+                '## Experience',
+                '',
+                ...roles.map((r) => `- ${r.title}, ${r.organisation} (${r.startDate.slice(0, 4)} to ${r.endDate ? r.endDate.slice(0, 4) : 'present'}): ${r.summary}`),
+                '',
+              ]
+            : []),
+          ...(education.length ? ['## Education', '', ...education.map((e) => `- ${e.title}, ${e.organisation}`), ''] : []),
+          ...(skills.length ? ['## Skills', '', ...skills.map((g) => `- ${g.title}: ${g.items.join(', ')}`), ''] : []),
+          ...(posts.length ? ['## Writing', '', ...posts.map((p) => `- [${p.title}](${SITE_URL}/writing/${p.slug}): ${p.excerpt}`), ''] : []),
           '## Pages',
           '',
           `- [About](${SITE_URL}/about)`,
