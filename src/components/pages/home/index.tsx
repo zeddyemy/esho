@@ -12,7 +12,7 @@ import Testimonials from './testimonials'
 import { postsQuery, projectsQuery } from '@/hooks/api/content'
 import { experiencesQuery, homeContentQuery, settingsQuery, testimonialsQuery } from '@/hooks/api/site'
 import { CONTACT_CTA } from '@/constants/navigation'
-import { SECTION_GROUPS, isSectionVisible } from '@/lib/sections'
+import { isSectionVisible } from '@/lib/sections'
 import type { SectionKey } from '@/lib/sections'
 
 /** Featured projects lead; if none are featured, the first four are shown. */
@@ -31,8 +31,17 @@ export default function Home() {
 
   const show = (key: SectionKey) => isSectionVisible(settings, key)
 
-  // Every section switched off: the homepage still says who this is.
-  if (!SECTION_GROUPS[0].sections.some((s) => show(s.key))) {
+  // A section appears only when it is switched on and has something to show.
+  const showWork = show('home.work') && selected.length > 0
+  const showCapabilities = show('home.capabilities') && content.capabilities.items.length > 0
+  const showExperience = show('home.experience') && experiences.some((e) => e.kind === 'work')
+  const showTestimonials = show('home.testimonials') && testimonials.length > 0
+  const showWriting = show('home.writing') && posts.length > 0
+  const hasSections =
+    show('home.hero') || show('home.intro') || show('home.cta') || showWork || showCapabilities || showExperience || showTestimonials || showWriting
+
+  // Nothing to render: the homepage still says who this is.
+  if (!hasSections) {
     return (
       <section className="container-site flex min-h-[60dvh] flex-col justify-center py-24">
         <h1 className="font-display text-5xl leading-[1.05] md:text-7xl">{settings.ownerName}</h1>
@@ -47,18 +56,18 @@ export default function Home() {
   return (
     <>
       {show('home.hero') ? (
-        <Hero content={content.hero} settings={settings} workHref={show('home.work') ? '#work' : '/work'} />
+        <Hero content={content.hero} settings={settings} workHref={showWork ? '#work' : '/work'} />
       ) : (
         <h1 className="sr-only">
           {settings.ownerName}, {settings.roleTitle}
         </h1>
       )}
       {show('home.intro') ? <Intro content={content.intro} /> : null}
-      {show('home.work') ? <SelectedWork projects={selected} total={projects.length} /> : null}
-      {show('home.capabilities') ? <Capabilities content={content.capabilities} /> : null}
-      {show('home.experience') ? <Experience items={experiences} linkHash={show('about.experience') ? 'experience' : undefined} /> : null}
-      {show('home.testimonials') ? <Testimonials items={testimonials} /> : null}
-      {show('home.writing') ? <LatestWriting posts={posts} /> : null}
+      {showWork ? <SelectedWork projects={selected} total={projects.length} /> : null}
+      {showCapabilities ? <Capabilities content={content.capabilities} /> : null}
+      {showExperience ? <Experience items={experiences} linkHash={show('about.experience') ? 'experience' : undefined} /> : null}
+      {showTestimonials ? <Testimonials items={testimonials} /> : null}
+      {showWriting ? <LatestWriting posts={posts} /> : null}
       {show('home.cta') ? <Cta content={content.cta} email={settings.email} /> : null}
     </>
   )
