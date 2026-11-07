@@ -16,6 +16,16 @@ export interface SeoPageOverride {
   image: ImageAsset | null
 }
 
+/** True for an absolute http(s) link, whatever the scheme's case. Shared by the save schema and the reader. */
+export function isHttpUrl(value: string): boolean {
+  try {
+    const { protocol } = new URL(value)
+    return protocol === 'http:' || protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
 const strList = (v: unknown, max: number, len: number) =>
   Array.isArray(v) ? [...new Set(v.map((x) => str(x, len)).filter(Boolean))].slice(0, max) : []
@@ -44,7 +54,7 @@ export function normalizeSeo(raw: unknown) {
     image: imageOrNull(seo.image),
     keywords: strList(seo.keywords, 20, 40),
     alternateNames: strList(seo.alternateNames, 6, 60),
-    profiles: strList(seo.profiles, 10, 300).filter((u) => /^https?:\/\//.test(u)),
+    profiles: strList(seo.profiles, 10, 300).filter(isHttpUrl),
     googleVerification: str(seo.googleVerification, 120),
     bingVerification: str(seo.bingVerification, 120),
     pages,
