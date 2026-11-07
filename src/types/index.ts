@@ -237,6 +237,10 @@ export interface AboutContent {
   image: ImageAsset | null
   facts: Array<{ label: string; value: string }>
   principles: Array<{ title: string; body: string }>
+  /** Heading of the tools section. */
+  stackHeading: string
+  /** One line under the tools heading; blank hides it. */
+  stackIntro: string
 }
 
 export interface ContactContent {

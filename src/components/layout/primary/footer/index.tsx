@@ -65,7 +65,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
                 </a>
               </li>
             ) : null}
-            <li className="text-mute">{settings.location}</li>
+            {settings.location ? <li className="text-mute">{settings.location}</li> : null}
           </ul>
         </div>
       </div>

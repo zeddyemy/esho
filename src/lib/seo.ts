@@ -132,7 +132,11 @@ function personNode(settings: SiteSettings, opts: { skills?: Array<string>; educ
       : undefined,
     sameAs: sameAs.length ? sameAs : undefined,
     knowsAbout: opts.skills?.length ? opts.skills : undefined,
-    hasOccupation: { '@type': 'Occupation', name: settings.roleTitle, occupationLocation: { '@type': 'City', name: settings.location.split(',')[0]?.trim() } },
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: settings.roleTitle,
+      occupationLocation: settings.location ? { '@type': 'City', name: settings.location.split(',')[0]?.trim() } : undefined,
+    },
     alumniOf: opts.education?.length
       ? opts.education.map((e) => ({ '@type': 'EducationalOrganization', name: e.organisation, url: e.url || undefined }))
       : undefined,

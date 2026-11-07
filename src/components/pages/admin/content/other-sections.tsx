@@ -16,7 +16,7 @@ export function AboutSection({ value }: { value: AboutContent }) {
   return (
     <SectionCard
       title="About page"
-      description="Experience, education and tools are edited on their own pages in the sidebar."
+      description="Experience, education and the tools themselves are edited on their own pages in the sidebar."
       onSubmit={() => void form.handleSubmit()}
       footer={
         <form.AppForm>
@@ -69,6 +69,14 @@ export function AboutSection({ value }: { value: AboutContent }) {
           </div>
         )}
       </form.Field>
+
+      <div className="grid gap-4">
+        <p className="text-sm font-medium">Tools section</p>
+        <form.AppField name="stackHeading">{(f) => <f.TextField label="Heading" maxLength={60} />}</form.AppField>
+        <form.AppField name="stackIntro">
+          {(f) => <f.TextareaField label="Introduction" rows={2} maxLength={200} hint="Optional. Leave blank to show no introduction." />}
+        </form.AppField>
+      </div>
     </SectionCard>
   )
 }

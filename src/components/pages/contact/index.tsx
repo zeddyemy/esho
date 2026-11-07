@@ -88,7 +88,7 @@ export default function Contact({ type }: { type?: string }) {
               <SocialLinks socials={settings.socials} className="mt-2 flex-col gap-y-1.5" linkClassName="text-base text-ink" />
             </div>
 
-            <p className="text-sm text-mute">{settings.location}</p>
+            {settings.location ? <p className="text-sm text-mute">{settings.location}</p> : null}
           </aside>
         ) : null}
       </section>

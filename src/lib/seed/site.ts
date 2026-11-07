@@ -25,23 +25,23 @@ export const seedSettings: SiteSettings = {
   email: 'zeddyemy@gmail.com',
   phones: [],
   whatsapp: '',
-  location: 'Lagos, Nigeria',
+  location: '',
   socials: {
     github: 'https://github.com/zeddyemy',
     linkedin: 'https://www.linkedin.com/in/emmanuel-olowu',
     x: 'https://x.com/EmmanuelZeddy',
   },
   resume: null,
-  footerNote: 'Designed and built by Emmanuel Olowu in Lagos.',
+  footerNote: 'Designed and built by Emmanuel Olowu.',
   showWriting: true,
   showTestimonials: true,
   showResume: true,
   appearance: DEFAULT_APPEARANCE,
   hiddenSections: [],
   seo: {
-    title: 'Emmanuel Olowu | Senior Full-Stack Product Engineer, Lagos',
+    title: 'Emmanuel Olowu | Senior Full-Stack Product Engineer',
     description:
-      'Emmanuel Olowu is a senior full-stack product engineer in Lagos, designing, building and shipping web products, data systems and AI-assisted tools.',
+      'Emmanuel Olowu is a senior full-stack product engineer, designing, building and shipping web products, data systems and AI-assisted tools.',
     image: null,
     googleVerification: '',
     bingVerification: '',
@@ -98,7 +98,7 @@ export const seedHome: HomeContent = {
 
 export const seedAbout: AboutContent = {
   heading: 'Engineer by trade, analyst by habit.',
-  lead: 'I am Emmanuel Olowu, a senior full-stack product engineer based in Lagos. I build software end to end and stay with it after launch.',
+  lead: 'I am Emmanuel Olowu, a senior full-stack product engineer. I build software end to end and stay with it after launch.',
   story: [
     'I started out building websites for small businesses, which taught me early that software only matters if it moves something for the person paying for it.',
     'Since then I have worked across the stack and across industries: commerce, fintech, logistics and media. I am as comfortable designing a Postgres schema as I am tuning an animation, and I pick tools for the problem rather than the other way round.',
@@ -106,7 +106,6 @@ export const seedAbout: AboutContent = {
   ].join('\n\n'),
   image: img.portraitAlt,
   facts: [
-    { label: 'Based in', value: 'Lagos, working worldwide' },
     { label: 'Focus', value: 'Product, platforms, data' },
     { label: 'Studying', value: 'BSc (Hons) IT & BIS, Middlesex University London' },
     { label: 'Building since', value: '2019' },
@@ -117,6 +116,8 @@ export const seedAbout: AboutContent = {
     { title: 'Ship, then measure', body: 'Small releases, real usage numbers, and changes based on what people actually do.' },
     { title: 'Leave it better documented', body: 'The next engineer, or the next me, should not need to guess.' },
   ],
+  stackHeading: 'Tools I reach for',
+  stackIntro: 'Tools and technologies I use, chosen to fit each project.',
 }
 
 export const seedContact: ContactContent = {
