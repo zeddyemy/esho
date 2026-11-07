@@ -101,7 +101,7 @@ export default function GeneralSettings() {
           <form.AppField name="whatsapp">
             {(f) => <f.TextField label="WhatsApp number" type="tel" inputMode="tel" placeholder="e.g. 0810 000 0000" hint="Optional" />}
           </form.AppField>
-          <form.AppField name="location">{(f) => <f.TextField label="Location" placeholder="Lagos, Nigeria" />}</form.AppField>
+          <form.AppField name="location">{(f) => <f.TextField label="Location" placeholder="City, Country" hint="Optional. Leave blank to show no location anywhere on the site." />}</form.AppField>
         </div>
       </FormSection>
 

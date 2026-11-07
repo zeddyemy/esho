@@ -41,6 +41,8 @@ export const aboutSchema = z.object({
   image: imageAssetSchema.nullable(),
   facts: z.array(z.object({ label: text(30, 'Label'), value: text(80, 'Value') })).max(6),
   principles: z.array(z.object({ title: text(50, 'Title'), body: text(200, 'Text') })).max(6),
+  stackHeading: text(60, 'Tools heading'),
+  stackIntro: optionalText(200),
 })
 
 export const contactSchema = z.object({

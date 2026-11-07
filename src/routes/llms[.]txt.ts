@@ -31,7 +31,7 @@ export const Route = createFileRoute('/llms.txt')({
           '',
           `> ${settings.seo.description}`,
           '',
-          `${settings.ownerName} is a ${settings.roleTitle.toLowerCase()} based in ${settings.location}.${settings.availability ? ` ${settings.availability}.` : ''}`,
+          `${settings.ownerName} is a ${settings.roleTitle.toLowerCase()}${settings.location ? ` based in ${settings.location}` : ''}.${settings.availability ? ` ${settings.availability}.` : ''}`,
           '',
           '## Contact',
           '',

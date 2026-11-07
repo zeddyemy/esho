@@ -53,7 +53,7 @@ export default function StackPage() {
 
   return (
     <div className="max-w-3xl">
-      <AdminPageHeader title="Stack" description='Tool groups in the "Tools I reach for" section on the About page.' actions={addButton} />
+      <AdminPageHeader title="Stack" description="Tool groups in the tools section on the About page. Its heading and introduction are edited under Content, About." actions={addButton} />
 
       <SortableRows
         items={groups}

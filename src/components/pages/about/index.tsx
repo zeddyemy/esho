@@ -23,7 +23,7 @@ export default function About() {
       <AboutIntro content={about} />
       <Story storyHtml={show('about.story') ? about.storyHtml : null} principles={show('about.principles') ? about.principles : []} />
       <Timeline items={timeline} />
-      {show('about.stack') ? <Stack groups={stack} /> : null}
+      {show('about.stack') ? <Stack groups={stack} heading={about.stackHeading} intro={about.stackIntro} /> : null}
       {show('about.closing') ? <ResumeCta settings={settings} /> : null}
     </>
   )

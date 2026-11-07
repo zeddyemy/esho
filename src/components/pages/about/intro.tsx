@@ -13,9 +13,13 @@ export default function AboutIntro({ content }: { content: AboutContent }) {
           {content.lead}
         </p>
         {content.facts.length ? (
-          <dl className="animate-fade-up mt-12 grid gap-px border-y border-line bg-line sm:grid-cols-2" style={{ animationDelay: '0.35s' }}>
-            {content.facts.map((fact) => (
-              <div key={fact.label} className="bg-paper py-4 pr-4">
+          // Rules are drawn per cell, so an odd count leaves no empty cell; a lone last fact spans the row.
+          <dl className="animate-fade-up mt-12 grid border-t border-line sm:grid-cols-2" style={{ animationDelay: '0.35s' }}>
+            {content.facts.map((fact, i) => (
+              <div
+                key={`${i}-${fact.label}`}
+                className="border-b border-line py-4 pr-4 sm:odd:last:col-span-2 sm:even:border-l sm:even:pl-6"
+              >
                 <dt className="text-sm text-mute">{fact.label}</dt>
                 <dd className="mt-1">{fact.value}</dd>
               </div>
