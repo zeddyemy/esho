@@ -1,4 +1,5 @@
 import { imageUrl, ogImageUrl } from '@/lib/media'
+import type { SeoPageKey } from '@/lib/seo-pages'
 import type { Experience, ImageAsset, Post, PostSummary, Project, ProjectSummary, SiteSettings } from '@/types'
 
 /**
@@ -36,6 +37,19 @@ interface SeoInput {
   modifiedAt?: string | null
   tags?: Array<string>
   noindex?: boolean
+  /** Applies that page's title, description and image overrides from the SEO page. */
+  page?: SeoPageKey
+}
+
+/** Case-insensitive de-duplication, keeping the first spelling. */
+const uniq = (items: Array<string | undefined | null>) => {
+  const seen = new Set<string>()
+  return items.filter((v): v is string => {
+    const key = v?.trim().toLowerCase()
+    if (!key || seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
 }
 
 /** Builds `head()` meta + links for a route. Inner pages are titled "{title} | {owner name}". */
@@ -51,11 +65,15 @@ export function seo({
   modifiedAt,
   tags = [],
   noindex,
+  page,
 }: SeoInput) {
   const owner = settings?.ownerName ?? 'Emmanuel Olowu'
-  const fullTitle = title ? `${title} | ${owner}` : (settings?.seo.title ?? owner)
-  const desc = (description ?? settings?.seo.description ?? '').replace(/\s+/g, ' ').trim().slice(0, 300)
+  const override = page ? settings?.seo.pages[page] : undefined
+  const fullTitle = override?.title || (title ? `${title} | ${owner}` : (settings?.seo.title ?? owner))
+  const desc = (override?.description || description || settings?.seo.description || '').replace(/\s+/g, ' ').trim().slice(0, 300)
+  if (override?.image) image = override.image
   const ogImage = image ? absoluteUrl(ogImageUrl(image.src)) : absoluteUrl(ogPath)
+  const keywords = uniq([...tags, ...(settings?.seo.keywords ?? [])]).join(', ')
   const ogAlt = image?.alt || fullTitle
   const url = absoluteUrl(path)
   const xHandle = settings?.socials.x?.split('/').filter(Boolean).pop()
@@ -70,6 +88,7 @@ export function seo({
         content: hidden ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
       },
       { name: 'author', content: owner },
+      ...(keywords ? [{ name: 'keywords', content: keywords }] : []),
       { property: 'og:type', content: type },
       { property: 'og:site_name', content: settings?.brandName ?? 'Esho' },
       { property: 'og:locale', content: 'en_GB' },
@@ -95,7 +114,7 @@ export function seo({
       { name: 'twitter:description', content: desc },
       { name: 'twitter:image', content: ogImage },
       { name: 'twitter:image:alt', content: ogAlt },
-      ...(xHandle ? [{ name: 'twitter:creator', content: `@${xHandle}` }] : []),
+      ...(xHandle ? [{ name: 'twitter:site', content: `@${xHandle}` }, { name: 'twitter:creator', content: `@${xHandle}` }] : []),
     ],
     links: [
       { rel: 'canonical', href: url },
@@ -113,12 +132,14 @@ export const personId = `${SITE_URL}/#person`
 const websiteId = `${SITE_URL}/#website`
 
 function personNode(settings: SiteSettings, opts: { skills?: Array<string>; education?: Array<Experience> } = {}) {
-  const sameAs = Object.values(settings.socials).filter(Boolean)
+  const sameAs = uniq([...Object.values(settings.socials), ...settings.seo.profiles])
+  const alternateNames = uniq([settings.brandName, ...settings.seo.alternateNames]).filter((n) => n.toLowerCase() !== settings.ownerName.toLowerCase())
+  const knowsAbout = uniq([...settings.seo.keywords, ...(opts.skills ?? [])])
   return {
     '@type': 'Person',
     '@id': personId,
     name: settings.ownerName,
-    alternateName: settings.brandName,
+    alternateName: alternateNames.length > 1 ? alternateNames : alternateNames[0],
     jobTitle: settings.roleTitle,
     description: settings.seo.description,
     url: SITE_URL,
@@ -131,7 +152,7 @@ function personNode(settings: SiteSettings, opts: { skills?: Array<string>; educ
       ? { '@type': 'PostalAddress', addressLocality: settings.location.split(',')[0]?.trim(), addressCountry: settings.location.split(',').at(-1)?.trim() }
       : undefined,
     sameAs: sameAs.length ? sameAs : undefined,
-    knowsAbout: opts.skills?.length ? opts.skills : undefined,
+    knowsAbout: knowsAbout.length ? knowsAbout : undefined,
     hasOccupation: {
       '@type': 'Occupation',
       name: settings.roleTitle,

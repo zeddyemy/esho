@@ -20,7 +20,7 @@ export const Route = createFileRoute('/_primary/work/')({
   head: ({ loaderData }) => {
     if (!loaderData) return {}
     return {
-      ...seo({ settings: loaderData.settings, title: 'Work', description: loaderData.header.body, path: '/work', ogPath: '/og/page/work' }),
+      ...seo({ settings: loaderData.settings, title: 'Work', description: loaderData.header.body, path: '/work', ogPath: '/og/page/work', page: 'work' }),
       scripts: [
         jsonLd(workCollectionJsonLd(loaderData.projects, loaderData.header.body)),
         jsonLd(breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work' }])),

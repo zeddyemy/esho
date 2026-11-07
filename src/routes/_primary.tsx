@@ -16,7 +16,7 @@ export const Route = createFileRoute('/_primary')({
         ...(googleVerification ? [{ name: 'google-site-verification', content: googleVerification }] : []),
         ...(bingVerification ? [{ name: 'msvalidate.01', content: bingVerification }] : []),
       ],
-      links: Object.values(settings.socials)
+      links: [...new Set([...Object.values(settings.socials), ...settings.seo.profiles])]
         .filter((href): href is string => Boolean(href))
         .map((href) => ({ rel: 'me', href })),
     }

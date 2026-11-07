@@ -18,7 +18,7 @@ export const Route = createFileRoute('/_primary/writing/')({
   head: ({ loaderData }) => {
     if (!loaderData) return {}
     return {
-      ...seo({ settings: loaderData.settings, title: 'Writing', description: loaderData.header.body, path: '/writing', ogPath: '/og/page/writing' }),
+      ...seo({ settings: loaderData.settings, title: 'Writing', description: loaderData.header.body, path: '/writing', ogPath: '/og/page/writing', page: 'writing' }),
       scripts: [
         jsonLd(blogJsonLd(loaderData.posts, loaderData.header.body)),
         jsonLd(breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Writing', path: '/writing' }])),

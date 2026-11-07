@@ -29,13 +29,6 @@ export const settingsSchema = z.object({
   showWriting: z.boolean(),
   showTestimonials: z.boolean(),
   showResume: z.boolean(),
-  seo: z.object({
-    title: optionalText(70),
-    description: optionalText(170),
-    image: imageAssetSchema.nullable(),
-    googleVerification: optionalText(120),
-    bingVerification: optionalText(120),
-  }),
 })
 
 export type SettingsInput = z.infer<typeof settingsSchema>
