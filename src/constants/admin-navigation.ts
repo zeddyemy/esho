@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   MessageSquareQuote,
   Palette,
+  Search,
   Settings,
 } from 'lucide-react'
 import type { LinkProps } from '@tanstack/react-router'
@@ -52,6 +53,7 @@ export const adminNav: Array<AdminNavGroup> = [
       { label: 'Page content', to: '/admin/content', icon: FileText },
       { label: 'Sections', to: '/admin/sections', icon: LayoutList },
       { label: 'Appearance', to: '/admin/appearance', icon: Palette },
+      { label: 'SEO', to: '/admin/seo', icon: Search },
       { label: 'Settings', to: '/admin/settings', icon: Settings },
     ],
   },

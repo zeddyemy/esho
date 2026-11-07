@@ -1,5 +1,6 @@
 import type { Appearance } from '@/lib/appearance'
 import type { HideableSectionKey } from '@/lib/sections'
+import type { SeoSettings } from '@/lib/seo-pages'
 
 /**
  * Domain types. These mirror the Supabase tables in `supabase/migrations`
@@ -62,14 +63,11 @@ export interface SiteSettings {
   appearance: Appearance
   /** Sections switched off in the admin (see lib/sections.ts). */
   hiddenSections: Array<HideableSectionKey>
-  seo: {
-    title: string
-    description: string
-    image: ImageAsset | null
-    /** Search Console / Bing Webmaster ownership codes (content="..." values). */
-    googleVerification: string
-    bingVerification: string
-  }
+  /**
+   * Search and sharing. `title` is never blank here (it falls back to name and
+   * role); every other field may be. Verification codes are the content="..." values.
+   */
+  seo: SeoSettings
 }
 
 /* ---------- Projects ---------- */

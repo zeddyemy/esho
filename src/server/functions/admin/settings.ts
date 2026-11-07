@@ -15,7 +15,6 @@ export const getAdminSettings = createServerFn({ method: 'GET' })
     const { data, error } = await db.from('site_settings').select('*').eq('id', 1).single()
     if (error) throw new Error(error.message)
     const s = toSettings(data)
-    const seo = (data.seo ?? {}) as { title?: string; description?: string; googleVerification?: string; bingVerification?: string }
     return {
       brandName: s.brandName,
       ownerName: s.ownerName,
@@ -43,14 +42,6 @@ export const getAdminSettings = createServerFn({ method: 'GET' })
       showWriting: s.showWriting,
       showTestimonials: s.showTestimonials,
       showResume: s.showResume,
-      // Raw values: an empty title means "use the default" on the public site.
-      seo: {
-        title: seo.title ?? '',
-        description: seo.description ?? '',
-        image: s.seo.image,
-        googleVerification: seo.googleVerification ?? '',
-        bingVerification: seo.bingVerification ?? '',
-      },
     }
   })
 
@@ -58,7 +49,7 @@ export const updateSettings = createServerFn({ method: 'POST' })
   .middleware([adminMiddleware])
   .validator(settingsSchema)
   .handler(async ({ data, context: { db } }) => {
-    const { data: before } = await db.from('site_settings').select('logo, portrait, seo, resume').eq('id', 1).single()
+    const { data: before } = await db.from('site_settings').select('logo, portrait, resume').eq('id', 1).single()
 
     const socials = Object.fromEntries(Object.entries(data.socials).filter(([, v]) => v))
     const { error } = await db
@@ -82,14 +73,13 @@ export const updateSettings = createServerFn({ method: 'POST' })
         show_writing: data.showWriting,
         show_testimonials: data.showTestimonials,
         show_resume: data.showResume,
-        seo: data.seo,
       })
       .eq('id', 1)
     if (error) throw new Error(error.message)
 
     await destroyRemovedImages(
-      { logo: before?.logo, portrait: before?.portrait, seo: before?.seo },
-      { logo: data.logo, portrait: data.portrait, seo: data.seo },
+      { logo: before?.logo, portrait: before?.portrait },
+      { logo: data.logo, portrait: data.portrait },
     )
     const oldResume = before?.resume as FileAsset | null | undefined
     if (oldResume?.publicId && oldResume.publicId !== data.resume?.publicId) await removeFiles([oldResume.publicId])

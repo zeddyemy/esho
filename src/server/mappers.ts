@@ -1,5 +1,6 @@
 /** Maps snake_case database rows to the app's camelCase domain types. */
 import { normalizeAppearance } from '@/lib/appearance'
+import { normalizeSeo } from '@/lib/seo-pages'
 import { EXPERIENCE_KINDS } from '@/types'
 import type { Tables } from '@/types/database'
 import type {
@@ -33,13 +34,7 @@ const list = <T>(value: unknown): Array<T> => (Array.isArray(value) ? (value as 
 const PLACEHOLDER_COVER = (alt: string): ImageAsset => ({ src: '', width: 16, height: 10, alt })
 
 export function toSettings(row: Tables<'site_settings'>): SiteSettings {
-  const seo = (row.seo ?? {}) as {
-    title?: string
-    description?: string
-    image?: unknown
-    googleVerification?: string
-    bingVerification?: string
-  }
+  const seo = normalizeSeo(row.seo)
   return {
     brandName: row.brand_name,
     ownerName: row.owner_name,
@@ -61,13 +56,7 @@ export function toSettings(row: Tables<'site_settings'>): SiteSettings {
     showResume: row.show_resume,
     appearance: normalizeAppearance(row.appearance),
     hiddenSections: [],
-    seo: {
-      title: seo.title || `${row.owner_name} | ${row.role_title}`,
-      description: seo.description ?? '',
-      image: image(seo.image),
-      googleVerification: seo.googleVerification ?? '',
-      bingVerification: seo.bingVerification ?? '',
-    },
+    seo: { ...seo, title: seo.title || `${row.owner_name} | ${row.role_title}` },
   }
 }
 

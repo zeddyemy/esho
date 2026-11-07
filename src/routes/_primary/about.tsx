@@ -24,7 +24,7 @@ export const Route = createFileRoute('/_primary/about')({
     if (!loaderData) return {}
     const { settings, about, skills, education } = loaderData
     return {
-      ...seo({ settings, title: 'About', description: about.lead, ogPath: '/og/page/about', path: '/about', type: 'profile' }),
+      ...seo({ settings, title: 'About', description: about.lead, ogPath: '/og/page/about', page: 'about', path: '/about', type: 'profile' }),
       scripts: [
         jsonLd(profilePageJsonLd(settings, { skills, education })),
         jsonLd(breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }])),

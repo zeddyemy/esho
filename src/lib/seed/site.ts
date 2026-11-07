@@ -5,6 +5,7 @@
  */
 import { DEFAULT_APPEARANCE } from '@/lib/appearance'
 import { img } from '@/lib/seed/images'
+import { normalizeSeo } from '@/lib/seo-pages'
 import type {
   AboutContent,
   ContactContent,
@@ -38,14 +39,11 @@ export const seedSettings: SiteSettings = {
   showResume: true,
   appearance: DEFAULT_APPEARANCE,
   hiddenSections: [],
-  seo: {
+  seo: normalizeSeo({
     title: 'Emmanuel Olowu | Senior Full-Stack Product Engineer',
     description:
       'Emmanuel Olowu is a senior full-stack product engineer, designing, building and shipping web products, data systems and AI-assisted tools.',
-    image: null,
-    googleVerification: '',
-    bingVerification: '',
-  },
+  }),
 }
 
 export const seedHome: HomeContent = {
