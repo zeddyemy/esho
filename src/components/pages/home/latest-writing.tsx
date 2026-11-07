@@ -1,15 +1,17 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 
 import { MediaImage } from '@/components/shared/media-image'
-import { Reveal } from '@/components/ui/custom/reveal'
 import { formatDate } from '@/lib/format'
 import type { PostSummary } from '@/types'
 
-/** Newest post as a feature with image, the next two as text rows beside it. */
+/**
+ * Latest posts as image cards with the title set on the photo. The excerpt
+ * slides up on hover or keyboard focus. Phones get a swipeable row that
+ * ends in an "All articles" card; wider screens show all three side by side.
+ */
 export default function LatestWriting({ posts }: { posts: Array<PostSummary> }) {
   if (posts.length === 0) return null
-  const [lead, ...rest] = posts
 
   return (
     <section className="border-t border-line py-20 md:py-28">
@@ -22,47 +24,64 @@ export default function LatestWriting({ posts }: { posts: Array<PostSummary> }) 
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-10 md:mt-16 lg:grid-cols-12 lg:gap-12">
-          <Reveal className="lg:col-span-7">
-            <Link to="/writing/$slug" params={{ slug: lead.slug }} className="group block">
-              {lead.cover ? (
-                <div className="relative aspect-[16/9] overflow-hidden">
+        <ul
+          aria-label="Latest articles"
+          className="scrollbar-none -mx-4 mt-10 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto overscroll-x-contain px-4 pb-1 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:mt-14 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+        >
+          {posts.map((post) => (
+            <li key={post.id} className="w-[80%] shrink-0 snap-start sm:w-[55%] md:w-auto">
+              <Link
+                to="/writing/$slug"
+                params={{ slug: post.slug }}
+                className="group relative block aspect-[4/5] overflow-hidden bg-paper-2"
+              >
+                {post.cover ? (
                   <MediaImage
-                    image={lead.cover}
+                    image={post.cover}
                     fill
-                    sizes="(min-width: 1024px) 55vw, 100vw"
-                    imgClassName="group-hover:scale-[1.03]"
+                    sizes="(min-width: 768px) 32vw, (min-width: 640px) 55vw, 80vw"
+                    imgClassName="transition-transform duration-700 group-hover:scale-[1.04]"
                   />
-                </div>
-              ) : null}
-              <p className="text-meta mt-6 text-mute">
-                {formatDate(lead.publishedAt)} / {lead.readingMinutes} min read
-              </p>
-              <h3 className="mt-3 font-display text-3xl leading-tight tracking-[-0.02em] transition-colors group-hover:text-cobalt md:text-4xl">
-                {lead.title}
-              </h3>
-              <p className="mt-3 max-w-xl text-mute">{lead.excerpt}</p>
-            </Link>
-          </Reveal>
+                ) : (
+                  <img
+                    src={`/og/writing/${post.slug}`}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                )}
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
 
-          {rest.length ? (
-            <ul className="lg:col-span-5">
-              {rest.map((post, i) => (
-                <li key={post.id} className="border-b border-line first:border-t">
-                  <Reveal delay={0.08 * (i + 1)} y={16}>
-                    <Link to="/writing/$slug" params={{ slug: post.slug }} className="group block py-7">
-                      <p className="text-meta text-mute">{formatDate(post.publishedAt)}</p>
-                      <h3 className="mt-2 font-display text-2xl leading-snug tracking-[-0.015em] transition-colors group-hover:text-cobalt">
-                        {post.title}
-                      </h3>
-                      <p className="mt-2 text-mute">{post.excerpt}</p>
-                    </Link>
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </div>
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white md:p-6">
+                  <p className="text-meta text-white/70">
+                    {formatDate(post.publishedAt)} / {post.readingMinutes} min read
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl leading-[1.1] tracking-[-0.02em] md:text-[1.75rem]">
+                    {post.title}
+                  </h3>
+                  {/* Collapsed until hover/focus; the row animates its height so nothing jumps. */}
+                  <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr] motion-reduce:transition-none">
+                    <p className="overflow-hidden text-sm leading-relaxed text-white/80">
+                      <span className="block pt-3">{post.excerpt}</span>
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          ))}
+
+          {/* End of the swipe row on phones: a clear way on to the rest. */}
+          <li className="w-[45%] shrink-0 snap-start sm:w-[30%] md:hidden">
+            <Link
+              to="/writing"
+              className="flex aspect-[4/5] h-full flex-col justify-end gap-3 border border-line-strong p-5 text-ink transition-colors hover:border-ink"
+            >
+              <ArrowRight className="size-5" />
+              <span className="font-display text-xl leading-tight">All articles</span>
+            </Link>
+          </li>
+        </ul>
       </div>
     </section>
   )

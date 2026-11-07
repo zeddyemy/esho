@@ -5,7 +5,10 @@ import { Reveal } from '@/components/ui/custom/reveal'
 import { formatYearRange } from '@/lib/format'
 import type { Experience as ExperienceItem } from '@/types'
 
-/** Sticky heading on the left, recent roles on the right. Full history lives on /about. */
+/**
+ * Recent roles at a glance: dates, title and company only. Summaries and
+ * stack live on /about, so the homepage stays short.
+ */
 export default function Experience({ items, linkHash }: { items: Array<ExperienceItem>; linkHash?: string }) {
   const roles = items.filter((e) => e.kind === 'work').slice(0, 3)
   if (roles.length === 0) return null
@@ -25,8 +28,8 @@ export default function Experience({ items, linkHash }: { items: Array<Experienc
 
         <ol className="md:col-span-8">
           {roles.map((role, i) => (
-            <li key={role.id} className="border-t border-line py-8 first:border-t-0 first:pt-0 md:py-10">
-              <Reveal delay={i * 0.06} y={16} className="grid gap-4 sm:grid-cols-8">
+            <li key={role.id} className="border-t border-line py-6 first:border-t-0 first:pt-0 md:py-8">
+              <Reveal delay={i * 0.06} y={16} className="grid gap-2 sm:grid-cols-8 sm:gap-4">
                 <p className="text-meta pt-1.5 text-mute sm:col-span-2">{formatYearRange(role.startDate, role.endDate)}</p>
                 <div className="sm:col-span-6">
                   <h3 className="text-xl font-medium">{role.title}</h3>
@@ -34,10 +37,6 @@ export default function Experience({ items, linkHash }: { items: Array<Experienc
                     {role.organisation}
                     {role.location ? `, ${role.location}` : ''}
                   </p>
-                  <p className="mt-4 max-w-xl leading-relaxed text-ink-2">{role.summary}</p>
-                  {role.stack.length ? (
-                    <p className="text-meta mt-5 text-mute">{role.stack.join(' / ')}</p>
-                  ) : null}
                 </div>
               </Reveal>
             </li>

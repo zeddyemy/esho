@@ -413,6 +413,14 @@
   animation: clip-reveal 1.2s var(--ease-out-expo) both;
 }
 
+/* Horizontal swipe rows: keep native scrolling, hide the bar. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Small uppercase mono label for admin UI (public pages avoid eyebrows). */
 @utility text-label {
   font-family: var(--font-mono);

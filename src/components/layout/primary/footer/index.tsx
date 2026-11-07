@@ -16,7 +16,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
         <div className="md:col-span-6">
           <a
             href={`mailto:${settings.email}`}
-            className="font-display text-3xl leading-tight break-all text-ink transition-colors hover:text-cobalt sm:text-4xl md:break-normal"
+            className="font-display text-[clamp(1.5rem,7vw,2.25rem)] leading-tight [overflow-wrap:anywhere] text-ink transition-colors hover:text-cobalt"
           >
             {settings.email}
           </a>
